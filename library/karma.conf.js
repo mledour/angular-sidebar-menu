@@ -3,7 +3,7 @@
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
+    basePath: 'angular-sidebar-menu',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/angular-sidebar-menu-demo'),
+      dir: require('path').join(__dirname, '../coverage/angular-sidebar-menu'),
       subdir: '.',
       reporters: [
         { type: 'html' },
