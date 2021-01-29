@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+  - lts/*
+dist: trusty
+os: linux
+
+env:
+  global:
+    - TMPDIR=/tmp
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+
+before_script:
+  - yarn global add @angular/cli
+  - yarn global add coveralls
+
+script:
+  - commitlint-travis
+  - ng lint angular-sidebar-menu
+  - ng test angular-sidebar-menu --watch=false --browsers=ChromeHeadless --code-coverage
+  - ng build angular-sidebar-menu --prod
+  - ng lint angular-sidebar-menu-demo
+  - ng test angular-sidebar-menu-demo --watch=false --browsers=ChromeHeadless --code-coverage
+  - ng build angular-sidebar-menu-demo --prod --base-href="/angular-sidebar-menu/$([ "$TRAVIS_PULL_REQUEST" != false ] && echo "pulls/$TRAVIS_PULL_REQUEST/" || echo "branches/$TRAVIS_BRANCH/")"
+  # - xvfb-run npm run e2e
+
+after_success:
+  - cat coverage/lcov.info | coveralls
+  - bash scripts/travis-gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-sidebar-menu
+
+before_install:
+  - npm install -g yarn

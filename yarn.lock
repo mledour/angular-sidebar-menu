@@ -1192,6 +1192,15 @@
   dependencies:
     find-up "^5.0.0"
 
+"@commitlint/travis-cli@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/travis-cli/-/travis-cli-11.0.0.tgz#cd0f25274e98daaf68732e53991b74347cde91b4"
+  integrity sha512-ZohGBnXeXv8hcba13fNz0HaCGy3CA4bz1A0PbyqwAzJA6Q85lBvLf1Wa78+Yxwo+PCZx85Vt8tpSrooHaHf2SA==
+  dependencies:
+    "@babel/runtime" "^7.11.2"
+    "@commitlint/cli" "^11.0.0"
+    execa "^4.0.0"
+
 "@commitlint/types@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-11.0.0.tgz#719cf05fcc1abb6533610a2e0f5dd1e61eac14fe"
