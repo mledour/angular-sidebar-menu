@@ -22,7 +22,6 @@ before_script:
 
 script:
   - commitlint-travis
-  - yarn prettier:check
   - ng lint angular-sidebar-menu
   - ng test angular-sidebar-menu --watch=false --browsers=ChromeHeadless --code-coverage
   - ng build angular-sidebar-menu --prod
@@ -33,7 +32,7 @@ script:
 
 after_success:
   - cat coverage/lcov.info | coveralls
-  - bash scripts/travis-gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-sidebar-menu
+  - bash scripts/travis-gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-sidebar-menu-demo
 
 before_install:
   - npm install -g yarn
