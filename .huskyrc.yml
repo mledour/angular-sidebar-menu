@@ -1,4 +1,7 @@
 hooks:
   commit-msg: commitlint -E HUSKY_GIT_PARAMS
   prepare-commit-msg: exec < /dev/tty && git cz --hook || true
-  pre-commit: yarn prettier:check
+  pre-commit:
+    git diff --cached --name-only --diff-filter=ACMR | grep -E '^demo/.*(js|ts)$' | xargs printf -- '--files=%s\n' | xargs ng lint angular-sidebar-menu-demo --
+    && git diff --staged --name-only --diff-filter=ACMR | grep -E '^library/.*(js|ts)$' | xargs printf -- '--files=%s\n' | xargs ng lint angular-sidebar-menu --
+    && git diff --staged --name-only --diff-filter=ACMR | xargs prettier --config .prettierrc.yml --write --ignore-unknown --
