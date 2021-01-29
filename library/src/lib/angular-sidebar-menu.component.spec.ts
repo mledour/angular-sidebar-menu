@@ -8,9 +8,8 @@ describe('AngularSidebarMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AngularSidebarMenuComponent ]
-    })
-    .compileComponents();
+      declarations: [AngularSidebarMenuComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

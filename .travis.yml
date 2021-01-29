@@ -22,6 +22,7 @@ before_script:
 
 script:
   - commitlint-travis
+  - yarn prettier:check
   - ng lint angular-sidebar-menu
   - ng test angular-sidebar-menu --watch=false --browsers=ChromeHeadless --code-coverage
   - ng build angular-sidebar-menu --prod

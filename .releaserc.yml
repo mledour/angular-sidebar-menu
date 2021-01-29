@@ -3,15 +3,15 @@ branches:
   - next
 
 plugins:
-  - "@semantic-release/commit-analyzer"
-  - "@semantic-release/release-notes-generator"
-  - "@semantic-release/changelog"
-  - - "@semantic-release/npm"
-    - pkgRoot: "dist/semantic-release-test"
-  - - "@semantic-release/git"
+  - '@semantic-release/commit-analyzer'
+  - '@semantic-release/release-notes-generator'
+  - '@semantic-release/changelog'
+  - - '@semantic-release/npm'
+    - pkgRoot: 'dist/semantic-release-test'
+  - - '@semantic-release/git'
     - assets:
         - CHANGELOG.md
       message: "chore(release): version ${nextRelease.version}\n\n[skip ci]\n\n${nextRelease.notes}"
-  - "@semantic-release/github"
+  - '@semantic-release/github'
 
 preset: angular
