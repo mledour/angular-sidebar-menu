@@ -133,6 +133,15 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/cdk@^11.1.1":
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.1.1.tgz#87cf1ff8eef898296129742b503bff1f979b7bc1"
+  integrity sha512-rIog+eqv6RtpSWKM+iHQ5oHyOALMxRXkeTiJyvPfBCYQ2hzPN16+eNxP/JOR+C4y7pMaJyPur0pC572IZEnCsw==
+  dependencies:
+    tslib "^2.0.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@~11.1.1":
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-11.1.1.tgz#897dd3273434f5092cbcde515737d6c72612eae7"
@@ -216,6 +225,13 @@
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-11.1.1.tgz#c8c468aba528f1f2764cf0bc7d9ab36636795473"
   integrity sha512-MVysENcKonjMowdd2SxXQGcvNVpMTWVhwr5IZ2FBZKW/FNnSBq0R3nsr25zU0h8QWQHkROPtFF0+AEaENh/yAg==
+  dependencies:
+    tslib "^2.0.0"
+
+"@angular/material@^11.1.1":
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.1.1.tgz#06104a6e456c3e56a1375fbb2890bed5d25d634b"
+  integrity sha512-atQyGG1/Xz1Q4udmQ7HWOYCAl14evL29EWhsrk4q/5OAumqKMEcJI4Ro/Pgn0N31HpsT2zHyDsPYe0bnjy+/Ww==
   dependencies:
     tslib "^2.0.0"
 
@@ -8787,6 +8803,11 @@ parse5-sax-parser@^6.0.1:
   integrity sha512-kXX+5S81lgESA0LsDuGjAlBybImAChYRMT+/uKCEXFBFOeEhS52qUCydGhU3qLRD8D9DVjaUo821WK7DM4iCeg==
   dependencies:
     parse5 "^6.0.1"
+
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parse5@^6.0.1:
   version "6.0.1"
