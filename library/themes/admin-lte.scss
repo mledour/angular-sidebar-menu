@@ -1,0 +1,21 @@
+.mk-sidebar-menu {
+  a {
+    color: #b8c7ce;
+    font-size: 14px;
+  }
+
+  & > li > a {
+    border-left: 3px solid transparent;
+    padding: 12px 5px 12px 15px;
+  }
+
+  & > li:hover > a,
+  & > li.mk-menu-item-active > a {
+    color: #fff;
+    background: #1e282c;
+  }
+
+  & > li.mk-menu-item-active > a {
+    border-left-color: #3c8dbc;
+  }
+}

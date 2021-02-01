@@ -1,6 +1,7 @@
 {
   "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../dist/angular-sidebar-menu",
+  "assets": ["./themes/**/*.scss"],
   "lib": {
     "entryFile": "src/public-api.ts"
   }

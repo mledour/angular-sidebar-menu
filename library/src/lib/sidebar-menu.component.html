@@ -1,0 +1,20 @@
+<ul class="mk-sidebar-menu">
+  <ng-container *ngFor="let item of menu">
+    <ng-container *ngTemplateOutlet="leafItem; context: { item: item }"></ng-container>
+  </ng-container>
+</ul>
+
+<ng-template #leafItem let-item="item">
+  <li routerLinkActive="mk-menu-item-active" [routerLinkActiveOptions]="{ exact: true }">
+    <a *ngIf="!item.url" [routerLink]="item.route">
+      <ng-container *ngTemplateOutlet="innerItem; context: { item: item }"></ng-container>
+    </a>
+    <a *ngIf="item.url" [href]="item.url" [target]="item.target">
+      <ng-container *ngTemplateOutlet="innerItem; context: { item: item }"></ng-container>
+    </a>
+  </li>
+</ng-template>
+
+<ng-template #innerItem let-item="item">
+  <span>{{ item.label }}</span>
+</ng-template>

@@ -1,0 +1,22 @@
+.mk-sidebar-menu {
+  list-style: none;
+
+  &,
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  li,
+  & > li > a {
+    position: relative;
+  }
+
+  & > li > a {
+    display: block;
+  }
+
+  li a {
+    text-decoration: none;
+  }
+}
