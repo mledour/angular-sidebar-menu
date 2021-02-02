@@ -18,5 +18,9 @@
 
   li a {
     text-decoration: none;
+
+    > .mk-menu-item-icon {
+      width: 20px;
+    }
   }
 }

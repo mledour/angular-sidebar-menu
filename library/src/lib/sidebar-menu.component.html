@@ -16,5 +16,6 @@
 </ng-template>
 
 <ng-template #innerItem let-item="item">
+  <i *ngIf="item.iconClasses" class="mk-menu-item-icon" [class]="item.iconClasses"></i>
   <span>{{ item.label }}</span>
 </ng-template>

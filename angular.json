@@ -24,7 +24,11 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["demo/favicon.ico", "demo/assets"],
-            "styles": ["demo/styles.scss", "dist/angular-sidebar-menu/themes/admin-lte.scss"],
+            "styles": [
+              "node_modules/font-awesome/css/font-awesome.css",
+              "dist/angular-sidebar-menu/themes/admin-lte.scss",
+              "demo/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {

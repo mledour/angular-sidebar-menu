@@ -1,5 +1,6 @@
 export interface MenuItem {
   label: string;
+  iconClasses?: string;
 }
 
 export interface MenuItemLeafRoute extends MenuItem {

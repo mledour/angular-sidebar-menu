@@ -13,6 +13,7 @@ export class AppComponent {
     {
       label: 'Get Started',
       route: '',
+      iconClasses: 'fa fa-road',
     },
     {
       label: 'Configuration',

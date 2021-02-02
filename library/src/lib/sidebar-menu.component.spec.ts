@@ -37,6 +37,7 @@ const menu: Menu = [
   {
     route: '/third',
     label: 'Third',
+    iconClasses: 'test-icon icon',
   },
 ];
 
@@ -92,6 +93,16 @@ describe('SidebarMenuComponent', () => {
     expect(getActivatedElementLabel(debugElement)).toEqual(menu[2].label);
     expect(isUrlEqualRoute(router, 2)).toBeTruthy();
   }));
+
+  it('should have one item with two icon classes', fakeAsync(() => {
+    const items = getElementsWithIconClasses(debugElement);
+    const iconClasses: string[] = (menu[2] as any).iconClasses.split(' ');
+
+    expect(items.length).toEqual(1);
+    iconClasses.forEach((iconClass) => {
+      expect(items[0].nativeElement).toHaveClass(iconClass);
+    });
+  }));
 });
 
 const navigateTo = (router: Router, route: string): void => {
@@ -109,6 +120,10 @@ const getActivatedElement = (debugElement: DebugElement): DebugElement => {
 
 const getActivatedElementLabel = (debugElement: DebugElement): string => {
   return getActivatedElement(debugElement).nativeElement.textContent;
+};
+
+const getElementsWithIconClasses = (debugElement: DebugElement): DebugElement[] => {
+  return debugElement.queryAll(By.css('.mk-menu-item-icon'));
 };
 
 const countActivatedElements = (debugElement: DebugElement): number => {
