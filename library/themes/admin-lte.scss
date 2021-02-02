@@ -7,6 +7,28 @@
   & > li > a {
     border-left: 3px solid transparent;
     padding: 12px 5px 12px 15px;
+
+    > .mk-menu-badges > span {
+      padding: 0.2em 0.6em 0.3em;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+      border-radius: 0.25em;
+
+      &.mk-badge-green {
+        background-color: #00a65a;
+      }
+      &.mk-badge-red {
+        background-color: #dd4b39;
+      }
+      &.mk-badge-yellow {
+        background-color: #f39c12;
+      }
+      &.mk-badge-blue {
+        background-color: #3c8dbc;
+      }
+    }
   }
 
   & > li:hover > a,

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { Menu, MenuItem, MenuItemLeafRoute } from './sidebar-menu.interface';
 
 @Component({

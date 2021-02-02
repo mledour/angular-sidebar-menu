@@ -14,6 +14,16 @@ export class AppComponent {
       label: 'Get Started',
       route: '',
       iconClasses: 'fa fa-road',
+      badges: [
+        {
+          label: 'new',
+          classes: 'mk-badge-green',
+        },
+        {
+          label: '1',
+          classes: 'mk-badge-red',
+        },
+      ],
     },
     {
       label: 'Configuration',

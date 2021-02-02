@@ -33,6 +33,16 @@ const menu: Menu = [
   {
     route: '/second',
     label: 'Second',
+    badges: [
+      {
+        label: 'test',
+        classes: 'class-1 class-2',
+      },
+      {
+        label: 'test 2',
+        classes: 'class-3 class-4',
+      },
+    ],
   },
   {
     route: '/third',
@@ -62,7 +72,7 @@ describe('SidebarMenuComponent', () => {
   beforeEach(fakeAsync(() => {
     hostFixture = TestBed.createComponent(WrapperStubComponent);
     hostComponent = hostFixture.componentInstance;
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router);
     debugElement = hostFixture.debugElement.query(By.directive(SidebarMenuComponent));
 
     router.initialNavigation();
@@ -94,15 +104,32 @@ describe('SidebarMenuComponent', () => {
     expect(isUrlEqualRoute(router, 2)).toBeTruthy();
   }));
 
-  it('should have one item with two icon classes', fakeAsync(() => {
-    const items = getElementsWithIconClasses(debugElement);
+  it('should have one element with icon and two icon classes', () => {
+    const elements = getElementsWithIconClasses(debugElement);
     const iconClasses: string[] = (menu[2] as any).iconClasses.split(' ');
 
-    expect(items.length).toEqual(1);
-    iconClasses.forEach((iconClass) => {
-      expect(items[0].nativeElement).toHaveClass(iconClass);
-    });
-  }));
+    expect(elements.length).toEqual(1);
+
+    // @ts-ignore
+    expectElementToHaveClasses(elements[0], menu[2].iconClasses);
+  });
+
+  it('should have one element with two badges', () => {
+    const badgesConf = menu[1].badges;
+    const elements = getElementsWithBadges(debugElement);
+    const badges = getBadgeElements(elements[0]);
+
+    expect(elements.length).toEqual(1);
+    expect(badges.length).toEqual(2);
+    // @ts-ignore
+    expect(badges[0].nativeElement.textContent).toEqual(badgesConf[0].label);
+    // @ts-ignore
+    expect(badges[1].nativeElement.textContent).toEqual(badgesConf[1].label);
+    // @ts-ignore
+    expectElementToHaveClasses(badges[0], badgesConf[0].classes);
+    // @ts-ignore
+    expectElementToHaveClasses(badges[1], badgesConf[1].classes);
+  });
 });
 
 const navigateTo = (router: Router, route: string): void => {
@@ -119,11 +146,19 @@ const getActivatedElement = (debugElement: DebugElement): DebugElement => {
 };
 
 const getActivatedElementLabel = (debugElement: DebugElement): string => {
-  return getActivatedElement(debugElement).nativeElement.textContent;
+  return getActivatedElement(debugElement).query(By.css('.mk-menu-label')).nativeElement.textContent;
 };
 
 const getElementsWithIconClasses = (debugElement: DebugElement): DebugElement[] => {
   return debugElement.queryAll(By.css('.mk-menu-item-icon'));
+};
+
+const getElementsWithBadges = (debugElement: DebugElement): DebugElement[] => {
+  return debugElement.queryAll(By.css('.mk-menu-badges'));
+};
+
+const getBadgeElements = (debugElement: DebugElement): DebugElement[] => {
+  return debugElement.queryAll(By.css('.mk-menu-badge'));
 };
 
 const countActivatedElements = (debugElement: DebugElement): number => {
@@ -138,4 +173,12 @@ const clickElement = (childDebugElement: DebugElement, itemIndex: number): void 
 
 const isUrlEqualRoute = (router: Router, menuItemIndex: number): boolean => {
   return router.url === (menu[menuItemIndex] as MenuItemLeafRoute).route;
+};
+
+const expectElementToHaveClasses = (element: DebugElement, classes: string) => {
+  const classesAr = classes.split(' ');
+
+  classesAr.forEach((cl) => {
+    expect(element.nativeElement).toHaveClass(cl);
+  });
 };

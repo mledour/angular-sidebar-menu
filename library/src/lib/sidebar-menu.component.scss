@@ -7,6 +7,10 @@
     padding: 0;
   }
 
+  li a {
+    text-decoration: none;
+  }
+
   li,
   & > li > a {
     position: relative;
@@ -14,13 +18,21 @@
 
   & > li > a {
     display: block;
-  }
-
-  li a {
-    text-decoration: none;
 
     > .mk-menu-item-icon {
       width: 20px;
+    }
+
+    > .mk-menu-badges {
+      position: absolute;
+      right: 10px;
+
+      > span {
+        float: right;
+        text-align: center;
+        white-space: nowrap;
+        margin-left: 4px;
+      }
     }
   }
 }
