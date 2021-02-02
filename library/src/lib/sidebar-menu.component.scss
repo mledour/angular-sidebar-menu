@@ -16,22 +16,30 @@
     position: relative;
   }
 
-  & > li > a {
-    display: block;
-
-    > .mk-menu-item-icon {
-      width: 20px;
+  & > li {
+    &.mk-menu-separator {
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
     }
 
-    > .mk-menu-badges {
-      position: absolute;
-      right: 10px;
+    & > a {
+      display: block;
 
-      > span {
-        float: right;
-        text-align: center;
-        white-space: nowrap;
-        margin-left: 4px;
+      > .mk-menu-item-icon {
+        width: 20px;
+      }
+
+      > .mk-menu-badges {
+        position: absolute;
+        right: 10px;
+
+        > span {
+          float: right;
+          text-align: center;
+          white-space: nowrap;
+          margin-left: 4px;
+        }
       }
     }
   }

@@ -21,6 +21,11 @@ interface MenuItemLeafURL extends MenuItem, MenuItemBadges {
   target?: string;
 }
 
-export type MenuItemLeaf = MenuItemLeafRoute | MenuItemLeafURL;
+interface MenuItemSeparator {
+  label: string;
+  separator: boolean;
+}
+
+export type MenuItemLeaf = MenuItemLeafRoute | MenuItemLeafURL | MenuItemSeparator;
 
 export type Menu = MenuItemLeaf[];

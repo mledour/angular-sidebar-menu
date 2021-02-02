@@ -26,6 +26,10 @@ export class AppComponent {
       ],
     },
     {
+      separator: true,
+      label: 'Separator',
+    },
+    {
       label: 'Configuration',
       route: 'configuration',
     },

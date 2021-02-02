@@ -49,6 +49,10 @@ const menu: Menu = [
     label: 'Third',
     iconClasses: 'test-icon icon',
   },
+  {
+    separator: true,
+    label: 'Separator',
+  },
 ];
 
 @Component({ template: '<mk-angular-sidebar-menu [menu]="menu"></mk-angular-sidebar-menu>' })
@@ -115,6 +119,7 @@ describe('SidebarMenuComponent', () => {
   });
 
   it('should have one element with two badges', () => {
+    // @ts-ignore
     const badgesConf = menu[1].badges;
     const elements = getElementsWithBadges(debugElement);
     const badges = getBadgeElements(elements[0]);
@@ -129,6 +134,12 @@ describe('SidebarMenuComponent', () => {
     expectElementToHaveClasses(badges[0], badgesConf[0].classes);
     // @ts-ignore
     expectElementToHaveClasses(badges[1], badgesConf[1].classes);
+  });
+
+  it('should create 1 separator', () => {
+    const elements = debugElement.queryAll(By.css('.mk-menu-separator'));
+    expect(elements.length).toEqual(1);
+    expect(elements[0].nativeElement.textContent).toEqual(menu[3].label);
   });
 });
 

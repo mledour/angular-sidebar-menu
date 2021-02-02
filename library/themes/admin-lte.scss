@@ -37,6 +37,14 @@
     background: #1e282c;
   }
 
+  & > li.mk-menu-separator {
+    color: #4b646f;
+    background: #1a2226;
+    padding: 10px 25px 10px 15px !important;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
   & > li.mk-menu-item-active > a {
     border-left-color: #3c8dbc;
   }
