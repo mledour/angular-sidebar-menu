@@ -1,0 +1,48 @@
+<div
+  class="mk-menu-item"
+  [ngClass]="{
+    'mk-menu-item-active': (!!rla && rla.isActive) || isActiveChild,
+    'mk-menu-node-open': !!menuItem.children && isOpen,
+    'mk-menu-separator': menuItem.separator,
+    'mk-menu-node': menuItem.children
+  }"
+>
+  <span *ngIf="menuItem.separator">{{ menuItem.label }}</span>
+  <a
+    *ngIf="menuItem.route || menuItem.route === ''"
+    [routerLink]="menuItem.route"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
+  </a>
+  <a *ngIf="menuItem.url" [href]="menuItem.url" [target]="menuItem.target">
+    <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
+  </a>
+  <ng-container *ngIf="menuItem.children">
+    <a (click)="isOpen = !isOpen">
+      <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
+    </a>
+    <ul>
+      <li
+        *ngFor="let childItem of menuItem.children"
+        [mk-sidebar-menu-item]="childItem"
+        [iconClasses]="iconClasses"
+        [toggleIconClasses]="toggleIconClasses"
+        (isItemActive)="isChildItemActive($event)"
+      ></li>
+    </ul>
+  </ng-container>
+</div>
+
+<ng-template #innerItem let-menuItem>
+  <ng-container *ngIf="asMenuItem(menuItem) as menuItem">
+    <i *ngIf="menuItem.iconClasses || iconClasses" class="mk-menu-item-icon" [class]="menuItem.iconClasses || iconClasses"></i>
+    <span class="mk-menu-label">{{ menuItem.label }}</span>
+    <span *ngIf="menuItem.badges || menuItem.children" class="mk-menu-pull-right">
+      <i *ngIf="menuItem.children" [class]="toggleIconClasses"></i>
+      <span *ngFor="let badge of menuItem.badges" class="mk-menu-badge" [class]="badge.classes">{{ badge.label }}</span>
+    </span>
+  </ng-container>
+</ng-template>

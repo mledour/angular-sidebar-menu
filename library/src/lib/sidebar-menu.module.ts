@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SidebarMenuComponent } from './sidebar-menu.component';
+import { SidebarMenuItemComponent } from './sidebar-menu-item.component';
 
 @NgModule({
-  declarations: [SidebarMenuComponent],
+  declarations: [SidebarMenuComponent, SidebarMenuItemComponent],
   imports: [RouterModule, CommonModule],
   exports: [SidebarMenuComponent],
 })

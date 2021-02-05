@@ -31,7 +31,44 @@ export class AppComponent {
     },
     {
       label: 'Configuration',
-      route: 'configuration',
+      iconClasses: 'fa fa-road',
+      children: [
+        {
+          label: 'Configuration 1',
+          url: '//google.com',
+          badges: [
+            {
+              label: '1',
+              classes: 'mk-badge-red',
+            },
+          ],
+        },
+        {
+          separator: true,
+          label: 'Separator',
+        },
+        {
+          label: 'Configuration 2',
+          children: [
+            {
+              label: 'Configuration 1',
+              url: '//google.com',
+            },
+            {
+              label: 'Configuration 1',
+              route: 'configuration',
+            },
+            {
+              label: 'Configuration 1',
+              url: '//google.com',
+            },
+          ],
+        },
+        {
+          label: 'Configuration 3',
+          url: '//google.com',
+        },
+      ],
     },
     {
       label: 'External',
