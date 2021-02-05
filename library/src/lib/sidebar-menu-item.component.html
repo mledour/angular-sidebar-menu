@@ -19,7 +19,7 @@
     <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
   </a>
   <ng-container *ngIf="menuItem.children">
-    <a (click)="isOpen = !isOpen">
+    <a (click)="onNodeToggleClick()">
       <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
     </a>
     <ul class="asm-menu__item__node">
@@ -29,6 +29,7 @@
         [iconClasses]="iconClasses"
         [toggleIconClasses]="toggleIconClasses"
         (isItemActive)="isChildItemActive($event)"
+        [isRootNode]="false"
       ></li>
     </ul>
   </ng-container>
