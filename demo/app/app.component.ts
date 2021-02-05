@@ -17,11 +17,11 @@ export class AppComponent {
       badges: [
         {
           label: 'new',
-          classes: 'mk-badge-green',
+          classes: 'badge--green',
         },
         {
           label: '1',
-          classes: 'mk-badge-red',
+          classes: 'badge--red',
         },
       ],
     },
@@ -39,7 +39,7 @@ export class AppComponent {
           badges: [
             {
               label: '1',
-              classes: 'mk-badge-red',
+              classes: 'badge--red',
             },
           ],
         },

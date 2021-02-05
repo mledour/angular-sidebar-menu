@@ -7,12 +7,12 @@ import { Menu, MenuItem, MenuItemLeafRoute } from './sidebar-menu.interface';
 
 @Component({
   selector: 'mk-angular-sidebar-menu',
-  template: `<ul class="mk-sidebar-menu">
+  template: `<ul class="asm-menu">
     <li *ngFor="let item of menu" [mk-sidebar-menu-item]="item" [toggleIconClasses]="toggleIconClasses" [iconClasses]="iconClasses"></li>
   </ul>`,
   styles: [
     `
-      .mk-sidebar-menu {
+      .asm-menu {
         list-style: none;
         margin: 0;
         padding: 0;

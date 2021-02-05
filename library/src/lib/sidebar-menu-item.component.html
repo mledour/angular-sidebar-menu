@@ -1,13 +1,11 @@
 <div
-  class="mk-menu-item"
+  class="asm-menu__item"
   [ngClass]="{
-    'mk-menu-item-active': (!!rla && rla.isActive) || isActiveChild,
-    'mk-menu-node-open': !!menuItem.children && isOpen,
-    'mk-menu-separator': menuItem.separator,
-    'mk-menu-node': menuItem.children
+    'asm-menu__item--open': !!menuItem.children && isOpen,
+    'asm-menu__item--active': (!!rla && rla.isActive) || isActiveChild
   }"
 >
-  <span *ngIf="menuItem.separator">{{ menuItem.label }}</span>
+  <span *ngIf="menuItem.separator" class="asm-menu__item__separator">{{ menuItem.label }}</span>
   <a
     *ngIf="menuItem.route || menuItem.route === ''"
     [routerLink]="menuItem.route"
@@ -24,7 +22,7 @@
     <a (click)="isOpen = !isOpen">
       <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
     </a>
-    <ul>
+    <ul class="asm-menu__item__node">
       <li
         *ngFor="let childItem of menuItem.children"
         [mk-sidebar-menu-item]="childItem"
@@ -38,11 +36,11 @@
 
 <ng-template #innerItem let-menuItem>
   <ng-container *ngIf="asMenuItem(menuItem) as menuItem">
-    <i *ngIf="menuItem.iconClasses || iconClasses" class="mk-menu-item-icon" [class]="menuItem.iconClasses || iconClasses"></i>
-    <span class="mk-menu-label">{{ menuItem.label }}</span>
-    <span *ngIf="menuItem.badges || menuItem.children" class="mk-menu-pull-right">
-      <i *ngIf="menuItem.children" [class]="toggleIconClasses"></i>
-      <span *ngFor="let badge of menuItem.badges" class="mk-menu-badge" [class]="badge.classes">{{ badge.label }}</span>
+    <i *ngIf="menuItem.iconClasses || iconClasses" [class]="menuItem.iconClasses || iconClasses" class="asm-menu__item__icon"></i>
+    <span class="asm-menu__item__label">{{ menuItem.label }}</span>
+    <span *ngIf="menuItem.badges || menuItem.children" class="asm-menu__item__pull">
+      <i *ngIf="menuItem.children" [class]="toggleIconClasses" class="asm-menu__item___toggle"></i>
+      <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-menu__item___badge">{{ badge.label }}</span>
     </span>
   </ng-container>
 </ng-template>
