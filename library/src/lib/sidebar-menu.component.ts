@@ -6,9 +6,9 @@ import { filter } from 'rxjs/operators';
 import { Menu, MenuItem, MenuItemLeafRoute } from './sidebar-menu.interface';
 
 @Component({
-  selector: 'mk-angular-sidebar-menu',
+  selector: 'asm-angular-sidebar-menu',
   template: `<ul class="asm-menu">
-    <li *ngFor="let item of menu" [mk-sidebar-menu-item]="item" [toggleIconClasses]="toggleIconClasses" [iconClasses]="iconClasses"></li>
+    <li *ngFor="let item of menu" [asm-sidebar-menu-item]="item" [toggleIconClasses]="toggleIconClasses" [iconClasses]="iconClasses"></li>
   </ul>`,
   styles: [
     `

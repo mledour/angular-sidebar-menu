@@ -25,7 +25,7 @@
     <ul class="asm-menu__item__node">
       <li
         *ngFor="let childItem of menuItem.children"
-        [mk-sidebar-menu-item]="childItem"
+        [asm-sidebar-menu-item]="childItem"
         [iconClasses]="iconClasses"
         [toggleIconClasses]="toggleIconClasses"
         (isItemActive)="isChildItemActive($event)"

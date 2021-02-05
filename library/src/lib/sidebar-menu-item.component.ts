@@ -7,13 +7,13 @@ import { MenuItem } from './sidebar-menu.interface';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'li[mk-sidebar-menu-item]',
+  selector: 'li[asm-sidebar-menu-item]',
   templateUrl: 'sidebar-menu-item.component.html',
   styleUrls: ['sidebar-menu-item.component.scss'],
 })
 export class SidebarMenuItemComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @Input('mk-sidebar-menu-item') menuItem!: MenuItem;
+  @Input('asm-sidebar-menu-item') menuItem!: MenuItem;
   @Input() iconClasses: string | undefined;
   @Input() toggleIconClasses: string | undefined;
 
