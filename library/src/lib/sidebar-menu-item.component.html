@@ -1,18 +1,14 @@
 <div
   class="asm-menu__item"
+  routerLinkActive="asm-menu__item--active"
+  [routerLinkActiveOptions]="{ exact: true }"
   [ngClass]="{
     'asm-menu__item--open': !!menuItem.children && isOpen,
-    'asm-menu__item--active': (!!rla && rla.isActive) || isActiveChild
+    'asm-menu__item--active': isActiveChild
   }"
 >
   <span *ngIf="menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
-  <a
-    *ngIf="menuItem.route || menuItem.route === ''"
-    [routerLink]="menuItem.route"
-    routerLinkActive
-    #rla="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
+  <a *ngIf="menuItem.route || menuItem.route === ''" [routerLink]="menuItem.route">
     <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
   </a>
   <a *ngIf="menuItem.url" [href]="menuItem.url" [target]="menuItem.target">

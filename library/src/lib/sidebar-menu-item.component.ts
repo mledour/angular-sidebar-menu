@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router, RouterLinkActive } from '@angular/router';
 import { Subject } from 'rxjs';
 
@@ -19,8 +19,6 @@ export class SidebarMenuItemComponent implements OnInit, OnDestroy {
   @Input() iconClasses: string | undefined;
   @Input() toggleIconClasses: string | undefined;
   @Input() isRootNode = true;
-
-  @ViewChild('rla') rla?: RouterLinkActive;
 
   @Output() isItemActive = new EventEmitter<boolean>();
 
