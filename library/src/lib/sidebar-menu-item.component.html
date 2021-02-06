@@ -5,7 +5,7 @@
     'asm-menu__item--active': (!!rla && rla.isActive) || isActiveChild
   }"
 >
-  <span *ngIf="menuItem.separator" class="asm-menu__item__separator">{{ menuItem.label }}</span>
+  <span *ngIf="menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
   <a
     *ngIf="menuItem.route || menuItem.route === ''"
     [routerLink]="menuItem.route"
@@ -39,9 +39,13 @@
   <ng-container *ngIf="asMenuItem(menuItem) as menuItem">
     <i *ngIf="menuItem.iconClasses || iconClasses" [class]="menuItem.iconClasses || iconClasses" class="asm-menu__item__icon"></i>
     <span class="asm-menu__item__label">{{ menuItem.label }}</span>
-    <span *ngIf="menuItem.badges || menuItem.children" class="asm-menu__item__pull">
-      <i *ngIf="menuItem.children" [class]="toggleIconClasses" class="asm-menu__item___toggle"></i>
-      <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-menu__item___badge">{{ badge.label }}</span>
+    <span
+      *ngIf="menuItem.badges || menuItem.children"
+      class="asm-menu__item__pull"
+      [ngClass]="{ 'asm-badges': menuItem.badges, 'asm-toggle': menuItem.children }"
+    >
+      <i *ngIf="menuItem.children" [class]="toggleIconClasses" class="asm-toggle__icon"></i>
+      <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-badges__badge">{{ badge.label }}</span>
     </span>
   </ng-container>
 </ng-template>

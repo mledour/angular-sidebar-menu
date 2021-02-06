@@ -21,7 +21,7 @@ a {
   }
 
   &.asm-menu__item--open {
-    & > a > .asm-menu__item__pull i {
+    & > a > .asm-menu__item__pull .asm-toggle__icon {
       transform: rotate(-90deg);
     }
     & > .asm-menu__item__node {
@@ -30,14 +30,14 @@ a {
   }
 }
 
-.asm-menu__item__separator {
+.asm-menu__item__header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   display: block;
 }
 
-.asm-menu__item .asm-menu__item__separator {
+.asm-menu__item .asm-menu__item__header {
   margin-left: -6px;
 }
 
@@ -45,19 +45,20 @@ a {
   width: 20px;
 }
 
-.asm-menu__item__pull {
+.asm-menu__item__pull.asm-toggle,
+.asm-menu__item__pull.asm-badges {
   position: absolute;
   right: 10px;
 
-  .asm-menu__item___toggle,
-  .asm-menu__item___badge {
+  .asm-toggle__icon,
+  .asm-badges__badge {
     float: right;
     text-align: center;
     white-space: nowrap;
     margin-left: 4px;
   }
 
-  .asm-menu__item___toggle {
+  .asm-toggle__icon {
     margin: 0 4px 0 8px;
   }
 }

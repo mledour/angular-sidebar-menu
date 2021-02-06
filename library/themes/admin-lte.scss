@@ -38,20 +38,20 @@
   }
 }
 
-.asm-menu__item__separator {
+.asm-menu__item__header {
   padding: 10px 25px 10px 15px !important;
   color: #4b646f;
   background: #1a2226;
   font-size: 12px;
   text-transform: uppercase;
 
-  .asm-menu__item__separator {
+  .asm-menu__item__header {
     margin-left: -5px;
     padding: 6px 12px 6px 20px !important;
   }
 }
 
-.asm-menu__item___badge {
+.asm-badges__badge {
   padding: 0.2em 0.6em;
   font-size: 75%;
   font-weight: 700;

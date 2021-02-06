@@ -26,8 +26,7 @@ export class AppComponent {
       ],
     },
     {
-      separator: true,
-      label: 'Separator',
+      header: 'Separator',
     },
     {
       label: 'Configuration',
@@ -44,8 +43,7 @@ export class AppComponent {
           ],
         },
         {
-          separator: true,
-          label: 'Separator',
+          header: 'Separator',
         },
         {
           label: 'Configuration 2',
@@ -85,8 +83,7 @@ export class AppComponent {
           ],
         },
         {
-          separator: true,
-          label: 'Separator',
+          header: 'Separator',
         },
         {
           label: 'Configuration 2',
