@@ -16,17 +16,7 @@ a {
 
 .asm-menu__item {
   .asm-menu__item__node {
-    display: none;
     list-style: none;
-  }
-
-  &.asm-menu__item--open {
-    & > a > .asm-menu__item__pull .asm-toggle__icon {
-      transform: rotate(-90deg);
-    }
-    & > .asm-menu__item__node {
-      display: block;
-    }
   }
 }
 

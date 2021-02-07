@@ -4,7 +4,7 @@
   [routerLinkActiveOptions]="{ exact: true }"
   [ngClass]="{
     'asm-menu__item--open': !!menuItem.children && isOpen,
-    'asm-menu__item--active': isActiveChild
+    'asm-menu__item--active': !!menuItem.children && isActiveChild
   }"
 >
   <span *ngIf="menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
@@ -18,7 +18,7 @@
     <a (click)="onNodeToggleClick()">
       <ng-container *ngTemplateOutlet="innerItem; context: { $implicit: menuItem }"></ng-container>
     </a>
-    <ul class="asm-menu__item__node">
+    <ul class="asm-menu__item__node" [@openClose]="isOpen">
       <li
         *ngFor="let childItem of menuItem.children"
         [asm-sidebar-menu-item]="childItem"
@@ -40,7 +40,7 @@
       class="asm-menu__item__pull"
       [ngClass]="{ 'asm-badges': menuItem.badges, 'asm-toggle': menuItem.children }"
     >
-      <i *ngIf="menuItem.children" [class]="toggleIconClasses" class="asm-toggle__icon"></i>
+      <i *ngIf="menuItem.children" [class]="toggleIconClasses" [@rotate]="isOpen" class="asm-toggle__icon"></i>
       <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-badges__badge">{{ badge.label }}</span>
     </span>
   </ng-container>
