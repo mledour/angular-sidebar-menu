@@ -64,7 +64,7 @@ class WrapperStubComponent {
   menu: Menu = menu;
 }
 
-describe('SidebarMenuComponent', () => {
+describe('First Level Menu', () => {
   let hostComponent: WrapperStubComponent;
   let hostFixture: ComponentFixture<WrapperStubComponent>;
   let debugElement: DebugElement;
@@ -92,26 +92,26 @@ describe('SidebarMenuComponent', () => {
   }));
 
   it('should create 4 menu items', () => {
-    expect(debugElement.queryAll(By.css(cssSelectors.item)).length).toEqual(menu.length);
+    expect(debugElement.queryAll(By.css(cssSelectors.items)).length).toEqual(menu.length);
   });
 
   it('should have root menu item activated on init', () => {
-    expect(debugElement.queryAll(By.css(cssSelectors.itemActive)).length).toEqual(1);
-    expect(debugElement.query(By.css(cssSelectors.itemActiveLabel))).toHaveText(menu[0].label);
+    expect(debugElement.queryAll(By.css(cssSelectors.activatedItems)).length).toEqual(1);
+    expect(debugElement.query(By.css(cssSelectors.activatedItemsLabels))).toHaveText(menu[0].label);
   });
 
   it('should activate second menu item on navigation', fakeAsync(() => {
     navigateTo(router, (menu[1] as MenuItemLeafRoute).route);
 
-    expect(debugElement.queryAll(By.css(cssSelectors.itemActive)).length).toEqual(1);
-    expect(debugElement.query(By.css(cssSelectors.itemActiveLabel))).toHaveText(menu[1].label);
+    expect(debugElement.queryAll(By.css(cssSelectors.activatedItems)).length).toEqual(1);
+    expect(debugElement.query(By.css(cssSelectors.activatedItemsLabels))).toHaveText(menu[1].label);
   }));
 
   it('should navigate to item route on menu item click', fakeAsync(() => {
-    clickElement(debugElement, 2);
+    clickElement(debugElement, menu[2].label);
 
-    expect(debugElement.queryAll(By.css(cssSelectors.itemActive)).length).toEqual(1);
-    expect(debugElement.query(By.css(cssSelectors.itemActiveLabel))).toHaveText(menu[2].label);
+    expect(debugElement.queryAll(By.css(cssSelectors.activatedItems)).length).toEqual(1);
+    expect(debugElement.query(By.css(cssSelectors.activatedItemsLabels))).toHaveText(menu[2].label);
     expect(router.url).toEqual((menu[2] as MenuItemLeafRoute).route);
   }));
 

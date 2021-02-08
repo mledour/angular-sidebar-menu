@@ -11,7 +11,7 @@ export const customMatchers: jasmine.CustomMatcherFactories = {
         const expectedClasses = (expected && expected.split(' ').filter((v) => v.length)) || [];
 
         if (!expectedClasses.length) {
-          throw new Error('expected value do not contain classes');
+          throw new Error('expected value do not contain css classes');
         }
 
         return {
