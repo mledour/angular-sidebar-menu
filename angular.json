@@ -29,7 +29,7 @@
               "dist/angular-sidebar-menu/themes/admin-lte.scss",
               "demo/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["node_modules/prismjs/prism.js"]
           },
           "configurations": {
             "production": {

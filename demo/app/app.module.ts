@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,11 +8,22 @@ import { SidebarMenuModule } from 'angular-sidebar-menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConfigurationComponent } from './configuration/configuration.component';
-import { GetStartedComponent } from './get-started/get-started.component';
+import { ConfigurationComponent } from './pages/configuration/configuration.component';
+import { GetStartedComponent } from './pages/get-started/get-started.component';
+import { MenuDefinitionComponent } from './pages/menu-definition/menu-definition.component';
+import { CodeHighlightComponent } from './code-highlight/code-highlight.component';
+import { StubComponentComponent } from './pages/stub-component/stub-component.component';
 
 @NgModule({
-  declarations: [AppComponent, ConfigurationComponent, GetStartedComponent],
+  declarations: [
+    AppComponent,
+    ConfigurationComponent,
+    GetStartedComponent,
+    MenuDefinitionComponent,
+    CodeHighlightComponent,
+    CodeHighlightComponent,
+    StubComponentComponent,
+  ],
   imports: [BrowserModule, BrowserAnimationsModule, MatSidenavModule, AppRoutingModule, SidebarMenuModule],
   providers: [],
   bootstrap: [AppComponent],

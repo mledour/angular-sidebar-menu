@@ -1,25 +1,5 @@
-# AngularSidebarMenu
+# Angular Sidebar Menu
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.0.
+The sources for this package are in the [Angular Sidebar Menu](https://github.com/mledour/angular-sidebar-menu) repo. Please file issues and pull requests against that repo.
 
-## Code scaffolding
-
-Run `ng generate component component-name --project angular-sidebar-menu` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-sidebar-menu`.
-
-> Note: Don't forget to add `--project angular-sidebar-menu` or else it will be added to the default project in your `angular.json` file.
-
-## Build
-
-Run `ng build angular-sidebar-menu` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build angular-sidebar-menu`, go to the dist folder `cd dist/angular-sidebar-menu` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test angular-sidebar-menu` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+License: MIT

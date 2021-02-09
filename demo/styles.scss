@@ -1,10 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~normalize.css/normalize.css';
+@import '~prism-themes/themes/prism-vs.css';
+
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+  font-weight: 300;
+  color: #495057;
+  font-size: 14px;
+  font-family:
+    // Safari for OS X and iOS (San Francisco)
+    -apple-system,
+    // Chrome < 56 for OS X (San Francisco)
+    BlinkMacSystemFont,
+    // Windows
+    'Segoe UI',
+    // Android
+    'Roboto',
+    // Basic web fallback
+    'Helvetica Neue',
+    Arial, sans-serif,
+    // Emoji fonts
+    'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+pre[class*='language-'] {
+  border: none;
+  border-left: 10px solid #dee2e6;
+  background: #fff;
+  margin: 0 0 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2.5rem 0 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  color: inherit;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.table__documentation {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+
+  td,
+  th {
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  td {
+    pre[class*='language-'] {
+      border: none;
+      margin: 0;
+    }
+  }
 }
