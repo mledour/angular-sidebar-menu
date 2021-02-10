@@ -1,4 +1,4 @@
-.asm-menu a {
+.asm-menu__item__anchor {
   font-size: 14px;
   line-height: 20px;
   padding: 12px 5px 12px 15px;
@@ -6,34 +6,32 @@
   border-left: 3px solid transparent;
 }
 
-.asm-menu__item--active > a {
-  border-left-color: #3c8dbc;
+.asm-menu__item__anchor--active {
+  border-left-color: #3c8dbc !important;
 }
 
-.mk-menu-item:hover > a,
-.asm-menu__item--active > a,
-.asm-menu__item--open > a {
+.asm-menu__item__anchor:hover {
   background: #1e282c;
 }
 
-.asm-menu__item__node a {
+.asm-menu__item__node ul .asm-menu__item__anchor {
   padding: 5px 5px 5px 15px;
   color: #8aa4af;
   border-left: none;
   background: none;
+
+  &:hover,
+  &.asm-menu__item__anchor--active {
+    background: none;
+    color: #fff !important;
+  }
 }
 
-.asm-menu__item:hover > a,
-.asm-menu__item--open > a,
-.asm-menu__item--active > a {
-  color: #fff !important;
-}
-
-.asm-menu__item__node {
+.asm-menu__item__node ul {
   background: #2c3b41;
   padding-left: 5px !important;
 
-  .asm-menu__item__node {
+  .asm-menu__item__node ul {
     padding-left: 20px !important;
   }
 }

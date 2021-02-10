@@ -3,13 +3,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SidebarMenuComponent } from './sidebar-menu.component';
-import { SidebarMenuItemComponent } from './sidebar-menu-item.component';
-import { SidebarMenuItemService } from './sidebar-menu-item.service';
+import { MenuItemComponent } from './menu-item.component';
+import { MenuItemNodeService } from './menu-item-node.service';
+import { MenuItemNodeComponent } from './menu-item-node.component';
+import { MenuItemAnchorComponent } from './menu-item-anchor.component';
+import { MenuItemAnchorService } from './menu-item-anchor.service';
 
 @NgModule({
-  declarations: [SidebarMenuComponent, SidebarMenuItemComponent],
+  declarations: [SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
   imports: [RouterModule, CommonModule],
-  providers: [SidebarMenuItemService],
+  providers: [MenuItemNodeService, MenuItemAnchorService],
   exports: [SidebarMenuComponent],
 })
 export class SidebarMenuModule {}

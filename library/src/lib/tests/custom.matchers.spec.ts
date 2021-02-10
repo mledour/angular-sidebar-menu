@@ -16,6 +16,7 @@ export const customMatchers: jasmine.CustomMatcherFactories = {
 
         return {
           pass: !expectedClasses.find((cssClass) => !actual.nativeElement.classList.contains(cssClass)),
+          message: `Expected '${actual.nativeElement.classList}' to have classes '${expected}'`,
         };
       },
     };
@@ -30,6 +31,7 @@ export const customMatchers: jasmine.CustomMatcherFactories = {
 
         return {
           pass: actual.nativeElement.textContent === expected,
+          message: `Expected '${actual.nativeElement.textContent}' to have text '${expected}'`,
         };
       },
     };

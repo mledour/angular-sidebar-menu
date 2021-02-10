@@ -2,8 +2,7 @@ import { Router } from '@angular/router';
 import { ComponentFixture, tick } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { cssSelectors } from './css-selectors.spec';
-import { Menu, MenuItem, MenuItemLeafRoute } from '../sidebar-menu.interface';
+import { Menu, MenuItem } from '../sidebar-menu.interface';
 
 export const navigateTo = (router: Router, route: string): void => {
   router.navigateByUrl(route);

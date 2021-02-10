@@ -6,11 +6,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarMenuComponent } from '../sidebar-menu.component';
 import { Menu, MenuItemBadge, MenuItemLeafRoute } from '../sidebar-menu.interface';
-import { SidebarMenuItemComponent } from '../sidebar-menu-item.component';
-import { SidebarMenuItemService } from '../sidebar-menu-item.service';
+import { MenuItemComponent } from '../menu-item.component';
+import { MenuItemNodeService } from '../menu-item-node.service';
 import { customMatchers } from './custom.matchers.spec';
 import { cssSelectors } from './css-selectors.spec';
 import { clickElement, navigateTo } from './utils.spec';
+import { MenuItemAnchorService } from '../menu-item-anchor.service';
+import { MenuItemNodeComponent } from '../menu-item-node.component';
+import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
 
 @Component({})
 class RoutedStubComponent {}
@@ -74,8 +77,8 @@ describe('First Level Menu', () => {
     jasmine.addMatchers(customMatchers);
 
     await TestBed.configureTestingModule({
-      declarations: [WrapperStubComponent, SidebarMenuComponent, SidebarMenuItemComponent],
-      providers: [SidebarMenuItemService],
+      declarations: [WrapperStubComponent, SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
+      providers: [MenuItemNodeService, MenuItemAnchorService],
       imports: [RouterTestingModule.withRoutes(routes)],
     }).compileComponents();
   });

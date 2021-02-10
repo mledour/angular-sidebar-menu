@@ -5,28 +5,24 @@ import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarMenuComponent } from '../sidebar-menu.component';
-import { Menu, MenuItemBadge, MenuItemLeafRoute } from '../sidebar-menu.interface';
-import { SidebarMenuItemComponent } from '../sidebar-menu-item.component';
-import { SidebarMenuItemService } from '../sidebar-menu-item.service';
+import { Menu } from '../sidebar-menu.interface';
+import { MenuItemComponent } from '../menu-item.component';
+import { MenuItemNodeService } from '../menu-item-node.service';
 import { customMatchers } from './custom.matchers.spec';
 import { cssSelectors } from './css-selectors.spec';
-import { clickElement, menuLengthRecursive, navigateTo } from './utils.spec';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { clickElement, menuLengthRecursive } from './utils.spec';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuItemAnchorService } from '../menu-item-anchor.service';
+import { MenuItemNodeComponent } from '../menu-item-node.component';
+import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
+import { element } from 'protractor';
 
 @Component({})
 class RoutedStubComponent {}
 
 const routes: Route[] = [
   {
-    path: '',
-    component: RoutedStubComponent,
-  },
-  {
-    path: 'node-1-children-1',
-    component: RoutedStubComponent,
-  },
-  {
-    path: 'node-2-children-1',
+    path: '**',
     component: RoutedStubComponent,
   },
 ];
@@ -44,13 +40,39 @@ const menu: Menu = [
         route: '/node-1-children-1',
       },
       {
-        label: 'node 2',
+        label: 'node 1 children 2',
         children: [
           {
             label: 'node 2 children 1',
             route: '/node-2-children-1',
           },
+          {
+            label: 'node 2 children 2',
+            route: '/node-2-children-2',
+          },
+          {
+            label: 'node 2 children 3',
+            children: [
+              {
+                label: 'node 3 children 1',
+                route: '/node-3-children-1',
+              },
+            ],
+          },
+          {
+            label: 'node 2 children 4',
+            children: [
+              {
+                label: 'node 3 children 1',
+                url: '/node-3-children-1',
+              },
+            ],
+          },
         ],
+      },
+      {
+        label: 'node 1 children 3',
+        route: '/node-2-children-3',
       },
     ],
   },
@@ -71,8 +93,8 @@ describe('Sub Menu', () => {
     jasmine.addMatchers(customMatchers);
 
     await TestBed.configureTestingModule({
-      declarations: [WrapperStubComponent, SidebarMenuComponent, SidebarMenuItemComponent],
-      providers: [SidebarMenuItemService],
+      declarations: [WrapperStubComponent, SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
+      providers: [MenuItemNodeService, MenuItemAnchorService],
       imports: [RouterTestingModule.withRoutes(routes), NoopAnimationsModule],
     }).compileComponents();
   });
@@ -96,7 +118,7 @@ describe('Sub Menu', () => {
     expect(debugElement.queryAll(By.css(cssSelectors.activatedItems)).length).toEqual(1);
 
     // Open first level node
-    clickElement(debugElement, menu[1].label, hostFixture);
+    const el = clickElement(debugElement, menu[1].label, hostFixture);
     expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(1);
     expect(debugElement.query(By.css(cssSelectors.openedItemsLabels))).toHaveText(menu[1].label);
     expect(router.url).toEqual('/');

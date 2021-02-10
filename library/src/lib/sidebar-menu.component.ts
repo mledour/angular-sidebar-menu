@@ -1,27 +1,25 @@
-import { AfterViewInit, OnInit, ViewChild } from '@angular/core';
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { NavigationEnd, Router, RouterLinkActive, Event as RouterEvent } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Component, Input } from '@angular/core';
 
-import { Menu, MenuItem, MenuItemLeafRoute } from './sidebar-menu.interface';
+import { MenuItemAnchorService } from './menu-item-anchor.service';
+import { MenuItemNodeService } from './menu-item-node.service';
+
+import { Menu } from './sidebar-menu.interface';
 
 @Component({
   selector: 'asm-angular-sidebar-menu',
+  styleUrls: ['sidebar-menu.component.scss'],
   template: `<ul class="asm-menu">
-    <li *ngFor="let item of menu" [asm-sidebar-menu-item]="item" [toggleIconClasses]="toggleIconClasses" [iconClasses]="iconClasses"></li>
+    <li *ngFor="let item of menu" [asm-menu-item]="item"></li>
   </ul>`,
-  styles: [
-    `
-      .asm-menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-    `,
-  ],
 })
 export class SidebarMenuComponent {
   @Input() menu!: Menu;
-  @Input() iconClasses: string | undefined;
-  @Input() toggleIconClasses: string | undefined;
+  @Input() set iconClasses(cssClasses: string) {
+    this.menuItemAnchorService.iconClasses = cssClasses;
+  }
+  @Input() set toggleIconClasses(cssClasses: string) {
+    this.menuItemNodeService.toggleIconClasses = cssClasses;
+  }
+
+  constructor(private menuItemAnchorService: MenuItemAnchorService, private menuItemNodeService: MenuItemNodeService) {}
 }
