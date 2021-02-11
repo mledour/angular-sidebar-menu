@@ -20,8 +20,8 @@ const TRANSITION_DURATION = 300;
       <li
         *ngFor="let childItem of menuItem.children; let last = last"
         [asm-menu-item]="childItem"
+        [level]="level + 1"
         (isItemActive)="isChildItemActive($event, last)"
-        [isRootNode]="false"
       ></li>
     </ul>
   </div>`,
@@ -49,7 +49,7 @@ const TRANSITION_DURATION = 300;
 export class MenuItemNodeComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input() menuItem!: MenuItem;
-  @Input() isRootNode = true;
+  @Input() level!: number;
 
   @Output() isItemActive = new EventEmitter<boolean>();
 
@@ -58,18 +58,20 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
   isChildActiveDone = false;
 
   private onDestroy$ = new Subject();
-  private isChildItemActiveTmp = false;
 
   constructor(public menuItemNodeService: MenuItemNodeService) {}
 
   ngOnInit(): void {
     this.menuItemNodeService.openedNode
       .pipe(
-        filter((sidebarMenuItemComponent) => sidebarMenuItemComponent !== this),
+        filter(() => !!this.isOpen),
+        filter((node) => node.nodeComponent !== this),
         takeUntil(this.onDestroy$)
       )
-      .subscribe((sidebarMenuItemComponent) => {
-        this.isOpen = false;
+      .subscribe((node) => {
+        if (node.nodeLevel <= this.level) {
+          this.isOpen = false;
+        }
       });
   }
 
@@ -94,10 +96,7 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
   }
 
   onNodeToggleClick(): void {
-    if (this.isRootNode) {
-      this.menuItemNodeService.openedNode.next(this);
-    }
-
     this.isOpen = !this.isOpen;
+    this.menuItemNodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
   }
 }

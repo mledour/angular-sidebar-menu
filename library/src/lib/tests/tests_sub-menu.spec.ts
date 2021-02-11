@@ -15,7 +15,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuItemAnchorService } from '../menu-item-anchor.service';
 import { MenuItemNodeComponent } from '../menu-item-node.component';
 import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
-import { element } from 'protractor';
 
 @Component({})
 class RoutedStubComponent {}
@@ -72,7 +71,16 @@ const menu: Menu = [
       },
       {
         label: 'node 1 children 3',
-        route: '/node-2-children-3',
+        route: '/node-1-children-3',
+      },
+      {
+        label: 'node 1 children 4',
+        children: [
+          {
+            label: 'node 2 children 41',
+            route: '/node-2-children-41',
+          },
+        ],
       },
     ],
   },
@@ -118,7 +126,7 @@ describe('Sub Menu', () => {
     expect(debugElement.queryAll(By.css(cssSelectors.activatedItems)).length).toEqual(1);
 
     // Open first level node
-    const el = clickElement(debugElement, menu[1].label, hostFixture);
+    clickElement(debugElement, menu[1].label, hostFixture);
     expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(1);
     expect(debugElement.query(By.css(cssSelectors.openedItemsLabels))).toHaveText(menu[1].label);
     expect(router.url).toEqual('/');
@@ -148,5 +156,23 @@ describe('Sub Menu', () => {
     expect(itemsActive.length).toEqual(1);
     expect(itemsActive[0]).toHaveText(menu[0].label);
     expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(0);
+  }));
+
+  it('should close other items on item click', fakeAsync(() => {
+    clickElement(debugElement, menu[1].label, hostFixture);
+    clickElement(debugElement, menu[1].children?.[1].label, hostFixture);
+    expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(2);
+
+    clickElement(debugElement, menu[1].children?.[3].label, hostFixture);
+    expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(2);
+  }));
+
+  it('should toggle item', fakeAsync(() => {
+    clickElement(debugElement, menu[1].label, hostFixture);
+    clickElement(debugElement, menu[1].children?.[1].label, hostFixture);
+    expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(2);
+
+    clickElement(debugElement, menu[1].children?.[1].label, hostFixture);
+    expect(debugElement.queryAll(By.css(cssSelectors.openedItems)).length).toEqual(1);
   }));
 });

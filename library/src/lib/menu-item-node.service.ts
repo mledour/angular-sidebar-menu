@@ -5,6 +5,6 @@ import { MenuItemNodeComponent } from './menu-item-node.component';
 
 @Injectable()
 export class MenuItemNodeService {
-  public openedNode = new Subject<MenuItemNodeComponent>();
+  public openedNode = new Subject<{ nodeComponent: MenuItemNodeComponent; nodeLevel: number }>();
   public toggleIconClasses?: string;
 }

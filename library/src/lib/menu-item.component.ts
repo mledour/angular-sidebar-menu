@@ -16,7 +16,7 @@ import { MenuItem } from './sidebar-menu.interface';
       <asm-menu-node
         *ngSwitchCase="!!menuItem.children"
         [menuItem]="menuItem"
-        [isRootNode]="isRootNode"
+        [level]="level"
         (isItemActive)="isChildItemActive($event)"
       ></asm-menu-node>
       <asm-menu-anchor *ngSwitchDefault [menuItem]="menuItem"></asm-menu-anchor>
@@ -27,6 +27,7 @@ export class MenuItemComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('asm-menu-item') menuItem!: MenuItem;
   @Input() isRootNode = true;
+  @Input() level!: number;
 
   @Output() isItemActive = new EventEmitter<boolean>();
 

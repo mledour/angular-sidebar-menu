@@ -9,7 +9,7 @@ import { Menu } from './sidebar-menu.interface';
   selector: 'asm-angular-sidebar-menu',
   styleUrls: ['sidebar-menu.component.scss'],
   template: `<ul class="asm-menu">
-    <li *ngFor="let item of menu" [asm-menu-item]="item"></li>
+    <li *ngFor="let item of menu" [asm-menu-item]="item" [level]="0"></li>
   </ul>`,
 })
 export class SidebarMenuComponent {
