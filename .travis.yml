@@ -38,6 +38,9 @@ after_success:
 before_install:
   - npm install -g yarn
 
+before_deploy:
+  - ng build angular-sidebar-menu --prod
+
 deploy:
   provider: script
   script: npx semantic-release
