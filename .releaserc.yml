@@ -1,6 +1,7 @@
 branches:
-  - master
-  - next
+  - name: master
+  - name: next
+    channel: next
 
 plugins:
   - '@semantic-release/commit-analyzer'
