@@ -2,6 +2,6 @@
  * Public API Surface of angular-sidebar-menu
  */
 
-export * from './lib/angular-sidebar-menu.service';
-export * from './lib/angular-sidebar-menu.component';
-export * from './lib/angular-sidebar-menu.module';
+export * from './lib/sidebar-menu.component';
+export * from './lib/sidebar-menu.module';
+export * from './lib/sidebar-menu.interface';

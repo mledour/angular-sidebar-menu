@@ -24,8 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["demo/favicon.ico", "demo/assets"],
-            "styles": ["demo/styles.css"],
-            "scripts": []
+            "styles": [
+              "node_modules/font-awesome/css/font-awesome.css",
+              "dist/angular-sidebar-menu/themes/admin-lte.scss",
+              "demo/styles.scss"
+            ],
+            "scripts": ["node_modules/prismjs/prism.js"]
           },
           "configurations": {
             "production": {
@@ -82,7 +86,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["demo/favicon.ico", "demo/assets"],
-            "styles": ["demo/styles.css"],
+            "styles": ["demo/styles.scss"],
             "scripts": []
           }
         },
@@ -145,6 +149,11 @@
   },
   "cli": {
     "packageManager": "yarn"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   },
   "defaultProject": "angular-sidebar-menu-demo"
 }

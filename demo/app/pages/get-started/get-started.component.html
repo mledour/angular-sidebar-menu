@@ -1,0 +1,40 @@
+<h1>Getting Started</h1>
+<p>
+  This guide explains how to setup your project to begin using Angular Sidebar Menu. It includes information on prerequisites and installing
+  Angular Sidebar Menu.
+</p>
+
+<h2>Download</h2>
+<p>
+  Angular Admin LTE is available at npm, if you have an existing application run the following command to download it to your project.
+  Angular Sidebar Menu is distributed in Angular Package Format format.
+</p>
+<app-code-highlight language="bash">npm install angular-admin-lte --save</app-code-highlight>
+
+<h2>Dependencies</h2>
+<p>
+  Angular Sidebar Menu has no JS dependencies but still css for icons and themes. Import them to your application by using either
+  angular.json or @import in your global app styles file.
+</p>
+<app-code-highlight language="css" ngPreserveWhitespaces
+  >"styles": [ "node_modules/font-awesome/css/font-awesome.css", "node_modules/angular-sidebar-menu/themes/admin-lte.scss",
+  "demo/styles.scss" ]</app-code-highlight
+>
+
+<app-code-highlight language="css" ngPreserveWhitespaces
+  >@import '~font-awesome/css/font-awesome.css'; @import '~angular-sidebar-menu/themes/admin-lte.scss';
+</app-code-highlight>
+
+<h2>Import</h2>
+<p>
+  Once Angular Sidebar Menu is downloaded and configured, module can be imported from 'angular-sidebar-menu' shorthand in your application
+  code.
+</p>
+<app-code-highlight language="javascript">{{ importLib }}</app-code-highlight>
+
+<h2>Display a menu</h2>
+<p>
+  Once Angular Sidebar Menu module is imported you will need to call the Angular Sidebar Menu component in a template. Now you can start
+  configuring the menu, see the <a routerLink="/configuration">Configuration</a> page.
+</p>
+<app-code-highlight language="javascript">{{ callComponent }}</app-code-highlight>

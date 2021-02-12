@@ -1,0 +1,72 @@
+.asm-menu__item__anchor {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 12px 5px 12px 15px;
+  color: #b8c7ce;
+  border-left: 3px solid transparent;
+}
+
+.asm-menu__item__anchor--active {
+  border-left-color: #3c8dbc !important;
+}
+
+.asm-menu__item__anchor:hover {
+  background: #1e282c;
+}
+
+.asm-menu__item__node ul .asm-menu__item__anchor {
+  padding: 5px 5px 5px 15px;
+  color: #8aa4af;
+  border-left: none;
+  background: none;
+
+  &:hover,
+  &.asm-menu__item__anchor--active {
+    background: none;
+    color: #fff !important;
+  }
+}
+
+.asm-menu__item__node ul {
+  background: #2c3b41;
+  padding-left: 5px !important;
+
+  .asm-menu__item__node ul {
+    padding-left: 20px !important;
+  }
+}
+
+.asm-menu__item__header {
+  padding: 10px 25px 10px 15px !important;
+  color: #4b646f;
+  background: #1a2226;
+  font-size: 12px;
+  text-transform: uppercase;
+
+  .asm-menu__item__header {
+    margin-left: -5px;
+    padding: 6px 12px 6px 20px !important;
+  }
+}
+
+.asm-badges__badge {
+  padding: 0.2em 0.6em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  border-radius: 0.25em;
+
+  &.badge--green {
+    background-color: #00a65a;
+  }
+  &.badge--red {
+    background-color: #dd4b39;
+  }
+  &.badge--yellow {
+    background-color: #f39c12;
+  }
+  &.badge--blue {
+    background-color: #3c8dbc;
+  }
+}

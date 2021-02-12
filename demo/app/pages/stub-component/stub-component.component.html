@@ -1,0 +1,11 @@
+<p>Route: {{ url }}</p>
+<p *ngIf="id">ID: {{ id }}</p>
+
+<nav *ngIf="url === 'child-routes'">
+  <ul>
+    <li><a routerLink="child-a">Child A</a></li>
+    <li><a routerLink="child-b">Child B</a></li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
