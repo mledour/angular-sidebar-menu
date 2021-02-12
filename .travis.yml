@@ -32,7 +32,7 @@ script:
   # - xvfb-run npm run e2e
 
 after_success:
-  - cat coverage/lcov.info | coveralls
+  - cat coverage/angular-sidebar-menu/lcov.info | coveralls
   - bash scripts/travis-gh-pages.sh $TMPDIR/gh-pages $TRAVIS_BUILD_DIR/dist/angular-sidebar-menu-demo
 
 before_install:

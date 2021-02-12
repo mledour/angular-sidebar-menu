@@ -27,7 +27,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, '../coverage/angular-sidebar-menu'),
       subdir: '.',
-      reporters: [{ type: 'html' }, { type: 'text-summary' }],
+      reporters: [{ type: 'lcovonly' }],
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
