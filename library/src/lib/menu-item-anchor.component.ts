@@ -19,7 +19,7 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
         class="asm-menu__item__anchor"
         [routerLink]="menuItem.route"
         routerLinkActive="asm-menu__item__anchor--active"
-        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLinkActiveOptions]="{ exact: menuItem.linkActiveExact === undefined ? true : menuItem.linkActiveExact }"
       >
         <ng-container *ngTemplateOutlet="innerItem"></ng-container>
       </a>

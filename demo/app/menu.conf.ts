@@ -6,17 +6,17 @@ export const menu: Menu = [
   },
   {
     label: 'Get Started',
-    route: '',
+    route: '/',
     iconClasses: 'fa fa-rocket',
   },
   {
     label: 'Configuration',
-    route: 'configuration',
+    route: '/configuration',
     iconClasses: 'fa fa-cog',
   },
   {
     label: 'Menu Definition',
-    route: 'menu-definition',
+    route: '/menu-definition',
     iconClasses: 'fa fa-cube',
   },
   {
@@ -28,7 +28,7 @@ export const menu: Menu = [
     children: [
       {
         label: 'Level One',
-        route: 'level-one',
+        route: '/level-one',
         badges: [
           {
             label: '1',
@@ -44,15 +44,15 @@ export const menu: Menu = [
             children: [
               {
                 label: 'Level Three',
-                url: '//google.com',
+                route: '/level-three-1',
               },
               {
                 label: 'Level Three',
-                url: '//google.com',
+                route: '/level-three-2',
               },
               {
                 label: 'Level Three',
-                url: '//google.com',
+                route: '/level-three-3',
               },
             ],
           },
@@ -61,25 +61,25 @@ export const menu: Menu = [
             children: [
               {
                 label: 'Level Three',
-                route: 'level-three-1',
+                route: '/level-three-2-1',
               },
               {
                 label: 'Level Three',
-                route: 'level-three-2',
+                route: '/level-three-2-2',
               },
               {
                 label: 'Level Three',
-                url: '//google.com',
+                route: '/level-three-2-3',
               },
             ],
           },
           {
             label: 'Level Two',
-            route: 'configuration',
+            route: '/level-two-1',
           },
           {
             label: 'Level Two',
-            route: 'configuration-2',
+            route: '/level-two-2',
           },
         ],
       },
@@ -88,19 +88,47 @@ export const menu: Menu = [
       },
       {
         label: 'Level One',
-        route: 'level-one-2',
+        route: '/level-one-2',
       },
     ],
   },
   {
-    label: 'External Link',
-    iconClasses: 'fa fa-external-link',
-    url: '//google.com',
+    label: 'Route With Parameter',
+    iconClasses: 'fa fa-sliders',
+    children: [
+      {
+        label: 'Route ID',
+        children: [
+          {
+            label: 'Sub Route ID One',
+            route: '/route-id/route-id-two/1',
+          },
+        ],
+      },
+      {
+        label: 'Route ID One',
+        route: '/route-id-one/1',
+      },
+      {
+        label: 'Route ID Two',
+        route: '/route-id-one/2',
+      },
+      {
+        label: 'Route ID Three',
+        route: '/route-id-one/3',
+      },
+    ],
+  },
+  {
+    label: 'Child Routes',
+    iconClasses: 'fa fa-level-down',
+    route: 'child-routes',
+    linkActiveExact: false,
   },
   {
     label: 'Badges',
     iconClasses: 'fa fa-star',
-    url: '//google.com',
+    route: 'badges',
     badges: [
       {
         label: 'new',
@@ -111,5 +139,10 @@ export const menu: Menu = [
         classes: 'badge--blue',
       },
     ],
+  },
+  {
+    label: 'External Link',
+    iconClasses: 'fa fa-external-link',
+    url: '//google.com',
   },
 ];

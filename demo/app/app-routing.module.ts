@@ -24,6 +24,28 @@ const routes: Routes = [
     component: MenuDefinitionComponent,
   },
   {
+    path: 'route-id-one/:id',
+    component: StubComponentComponent,
+  },
+  {
+    path: 'route-id/route-id-two/:id',
+    component: StubComponentComponent,
+  },
+  {
+    path: 'child-routes',
+    component: StubComponentComponent,
+    children: [
+      {
+        path: 'child-a',
+        component: StubComponentComponent,
+      },
+      {
+        path: 'child-b',
+        component: StubComponentComponent,
+      },
+    ],
+  },
+  {
     path: '**',
     component: StubComponentComponent,
   },

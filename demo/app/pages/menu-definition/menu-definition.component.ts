@@ -7,10 +7,13 @@ import { Component } from '@angular/core';
 })
 export class MenuDefinitionComponent {
   readonly menuType = 'Menu: (MenuItemLeafRoute | MenuItemLeafURL | MenuItemHeader | MenuItemNode)[]';
+
   readonly menuItemLeafRouteType = `label: string;
 iconClasses?: string;
 badges?: MenuItemBadge[];
-route: string;`;
+route: string;
+linkActiveExact: boolean = true`;
+
   readonly menuItemLeafURLType = `label: string;
 iconClasses?: string;
 badges?: MenuItemBadge[];
@@ -21,6 +24,7 @@ target?: string;`;
 iconClasses?: string;
 badges?: MenuItemBadge[];
 children: MenuItem[];`;
+
   readonly menuConfExample = `const menu = [
   {
     header: 'Documentation',

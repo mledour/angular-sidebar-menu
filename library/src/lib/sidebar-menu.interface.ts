@@ -11,6 +11,7 @@ export interface MenuItemBase {
 
 export interface MenuItemLeafRoute extends MenuItemBase {
   route: string;
+  linkActiveExact?: boolean;
 }
 
 export interface MenuItemLeafURL extends MenuItemBase {
