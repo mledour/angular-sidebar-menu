@@ -37,3 +37,10 @@ after_success:
 
 before_install:
   - npm install -g yarn
+
+deploy:
+  provider: script
+  script: npx semantic-release
+  skip_cleanup: true
+  on:
+    all_branches: true
