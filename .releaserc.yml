@@ -7,7 +7,7 @@ plugins:
   - '@semantic-release/release-notes-generator'
   - '@semantic-release/changelog'
   - - '@semantic-release/npm'
-    - pkgRoot: 'dist/semantic-release-test'
+    - pkgRoot: 'dist/angular-sidebar-menu'
   - - '@semantic-release/git'
     - assets:
         - CHANGELOG.md
