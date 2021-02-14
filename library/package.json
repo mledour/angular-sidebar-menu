@@ -1,6 +1,19 @@
 {
   "name": "angular-sidebar-menu",
   "version": "0.0.0-semantic-release",
+  "homepage": "https://mledour.github.io/angular-sidebar-menu/branches/master/",
+  "keywords": [
+    "angular"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mledour/angular-sidebar-menu.git"
+  },
+  "author": {
+    "name": "mledour",
+    "email": "michael.ledour@gmail.com"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/animations": "~11.1.0",
     "@angular/common": "~11.1.0",
