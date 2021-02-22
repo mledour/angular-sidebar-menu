@@ -6,6 +6,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 
 import { MenuItemNodeService } from './menu-item-node.service';
 import { MenuItem } from './sidebar-menu.interface';
+import { MenuItemRoleService } from './menu-item-role.service';
 
 const TRANSITION_DURATION = 300;
 
@@ -17,12 +18,15 @@ const TRANSITION_DURATION = 300;
       <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
-      <li
-        *ngFor="let childItem of menuItem.children; let last = last"
-        [asm-menu-item]="childItem"
-        [level]="level + 1"
-        (isItemActive)="isChildItemActive($event, last)"
-      ></li>
+      <ng-container *ngFor="let childItem of menuItem.children; let last = last">
+        <li
+          *ngIf="menuItemRoleService.showItem$(childItem.roles) | async"
+          [asm-menu-item]="childItem"
+          [level]="level + 1"
+          [itemDisabled]="itemDisabled"
+          (isItemActive)="isChildItemActive($event, last)"
+        ></li>
+      </ng-container>
     </ul>
   </div>`,
   animations: [
@@ -50,16 +54,17 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input() menuItem!: MenuItem;
   @Input() level!: number;
+  @Input() itemDisabled?: boolean;
 
   @Output() isItemActive = new EventEmitter<boolean>();
 
   isOpen?: boolean;
   isActiveChild?: boolean;
-  isChildActiveDone = false;
 
   private onDestroy$ = new Subject();
+  private isChildActiveDone = false;
 
-  constructor(public menuItemNodeService: MenuItemNodeService) {}
+  constructor(public menuItemNodeService: MenuItemNodeService, public menuItemRoleService: MenuItemRoleService) {}
 
   ngOnInit(): void {
     this.menuItemNodeService.openedNode

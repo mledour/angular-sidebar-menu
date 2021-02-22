@@ -17,8 +17,8 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
       <a
         *ngSwitchCase="!!menuItem.route || menuItem.route === ''"
         class="asm-menu__item__anchor"
-        [routerLink]="menuItem.route"
-        routerLinkActive="asm-menu__item__anchor--active"
+        [routerLink]="itemDisabled ? undefined : menuItem.route"
+        [routerLinkActive]="itemDisabled ? '' : 'asm-menu__item__anchor--active'"
         [routerLinkActiveOptions]="{ exact: menuItem.linkActiveExact === undefined ? true : menuItem.linkActiveExact }"
       >
         <ng-container *ngTemplateOutlet="innerItem"></ng-container>
@@ -40,7 +40,9 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
         class="asm-menu__item__pull"
         [ngClass]="{ 'asm-badges': menuItem.badges, 'asm-toggle': menuItem.children }"
       >
-        <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-badges__badge">{{ badge.label }}</span>
+        <span *ngFor="let badge of menuItem.badges" [class]="badge.classes" class="asm-badges__badge">{{
+          badge.label
+        }}</span>
         <span class="asm-toggle__icon"><ng-content select="[toggleIcon]"></ng-content></span>
       </span>
     </ng-template>`,
@@ -48,6 +50,8 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
 export class MenuItemAnchorComponent {
   @Input() menuItem!: MenuItem;
   @Input() isActive?: boolean;
+  @Input() itemDisabled?: boolean;
+
   @Output() clickAnchor = new EventEmitter<void>();
 
   constructor(public menuItemAnchorService: MenuItemAnchorService) {}

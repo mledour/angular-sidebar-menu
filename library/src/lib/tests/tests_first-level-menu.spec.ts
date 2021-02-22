@@ -14,6 +14,7 @@ import { clickElement, navigateTo } from './utils.spec';
 import { MenuItemAnchorService } from '../menu-item-anchor.service';
 import { MenuItemNodeComponent } from '../menu-item-node.component';
 import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
+import { MenuItemRoleService } from '../menu-item-role.service';
 
 @Component({})
 class RoutedStubComponent {}
@@ -77,8 +78,14 @@ describe('First Level Menu', () => {
     jasmine.addMatchers(customMatchers);
 
     await TestBed.configureTestingModule({
-      declarations: [WrapperStubComponent, SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
-      providers: [MenuItemNodeService, MenuItemAnchorService],
+      declarations: [
+        WrapperStubComponent,
+        SidebarMenuComponent,
+        MenuItemComponent,
+        MenuItemNodeComponent,
+        MenuItemAnchorComponent,
+      ],
+      providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
       imports: [RouterTestingModule.withRoutes(routes)],
     }).compileComponents();
   });

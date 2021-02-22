@@ -15,6 +15,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuItemAnchorService } from '../menu-item-anchor.service';
 import { MenuItemNodeComponent } from '../menu-item-node.component';
 import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
+import { MenuItemRoleService } from '../menu-item-role.service';
 
 @Component({})
 class RoutedStubComponent {}
@@ -101,8 +102,14 @@ describe('Sub Menu', () => {
     jasmine.addMatchers(customMatchers);
 
     await TestBed.configureTestingModule({
-      declarations: [WrapperStubComponent, SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
-      providers: [MenuItemNodeService, MenuItemAnchorService],
+      declarations: [
+        WrapperStubComponent,
+        SidebarMenuComponent,
+        MenuItemComponent,
+        MenuItemNodeComponent,
+        MenuItemAnchorComponent,
+      ],
+      providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
       imports: [RouterTestingModule.withRoutes(routes), NoopAnimationsModule],
     }).compileComponents();
   });
