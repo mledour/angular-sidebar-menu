@@ -19,8 +19,9 @@ import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
     <ul [@openClose]="isOpen">
       <ng-container *ngFor="let childItem of menuItem.children; let last = last">
         <li
+          asm-menu-item
           *ngIf="menuItemRoleService.showItem$(childItem.roles) | async"
-          [asm-menu-item]="childItem"
+          [menuItem]="childItem"
           [level]="level + 1"
           [itemDisabled]="itemDisabled"
           (isItemActive)="isChildItemActive($event, last)"

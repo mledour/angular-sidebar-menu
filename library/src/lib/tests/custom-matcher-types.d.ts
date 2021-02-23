@@ -2,6 +2,5 @@
 declare namespace jasmine {
   interface Matchers<T> {
     toHaveClasses(expected?: string, expectationFailOutput?: any): boolean;
-    toHaveText(expected?: string, expectationFailOutput?: any): boolean;
   }
 }

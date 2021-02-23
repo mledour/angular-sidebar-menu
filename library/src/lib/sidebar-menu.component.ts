@@ -11,7 +11,7 @@ import { MenuItemRoleService, Role } from './menu-item-role.service';
   styleUrls: ['sidebar-menu.component.scss'],
   template: `<ul class="asm-menu">
     <ng-container *ngFor="let item of menu">
-      <li *ngIf="menuItemService.showItem$(item.roles) | async" [asm-menu-item]="item" [level]="0"></li>
+      <li asm-menu-item *ngIf="menuItemService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
     </ng-container>
   </ul>`,
 })

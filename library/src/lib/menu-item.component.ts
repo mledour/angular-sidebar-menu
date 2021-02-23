@@ -9,8 +9,7 @@ import { MenuItem } from './sidebar-menu.interface';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'li[asm-menu-item]',
-  styleUrls: ['sidebar-menu.component.scss'],
+  selector: 'li[asm-menu-item][menuItem]',
   template: `
     <div
       *ngIf="{ disabled: (menuItemRoleService.disableItem$(menuItem.roles) | async) === true } as role"
@@ -36,7 +35,7 @@ import { MenuItem } from './sidebar-menu.interface';
 })
 export class MenuItemComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
-  @Input('asm-menu-item') menuItem!: MenuItem;
+  @Input() menuItem!: MenuItem;
   @Input() isRootNode = true;
   @Input() level!: number;
   @Input() itemDisabled?: boolean;
