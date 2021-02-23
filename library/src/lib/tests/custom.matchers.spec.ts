@@ -1,7 +1,10 @@
 import { DebugElement } from '@angular/core';
 
 export const customMatchers: jasmine.CustomMatcherFactories = {
-  toHaveClasses(util: jasmine.MatchersUtil, customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>): jasmine.CustomMatcher {
+  toHaveClasses(
+    util: jasmine.MatchersUtil,
+    customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>
+  ): jasmine.CustomMatcher {
     return {
       compare(actual: DebugElement, expected?: string): jasmine.CustomMatcherResult {
         if (!(actual.nativeElement.classList.contains instanceof Function)) {
@@ -22,7 +25,10 @@ export const customMatchers: jasmine.CustomMatcherFactories = {
     };
   },
 
-  toHaveText(util: jasmine.MatchersUtil, customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>): jasmine.CustomMatcher {
+  toHaveText(
+    util: jasmine.MatchersUtil,
+    customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>
+  ): jasmine.CustomMatcher {
     return {
       compare(actual: DebugElement, expected?: string): jasmine.CustomMatcherResult {
         if (!actual.nativeElement.textContent) {

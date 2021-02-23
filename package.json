@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "semantic-release": "semantic-release",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "prettier:check": "prettier --config .prettierrc.yml --check --ignore-unknown ."
+    "prettier:check": "prettier --config .prettierrc.yml --check --ignore-unknown .",
+    "prettier:write": "prettier --config .prettierrc.yml --write --ignore-unknown ."
   },
   "private": true,
   "dependencies": {
