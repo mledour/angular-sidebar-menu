@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { trigger, state, style, animate, transition, AUTO_STYLE, group } from '@angular/animations';
 
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -7,12 +6,12 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { MenuItemNodeService } from './menu-item-node.service';
 import { MenuItem } from './sidebar-menu.interface';
 import { MenuItemRoleService } from './menu-item-role.service';
-
-const TRANSITION_DURATION = 300;
+import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'asm-menu-node',
+  animations: [openCloseAnimation, rotateAnimation],
   template: `<div class="asm-menu__item__node" [ngClass]="{ 'asm-menu__item__node--open': isOpen }">
     <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
       <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
@@ -29,26 +28,6 @@ const TRANSITION_DURATION = 300;
       </ng-container>
     </ul>
   </div>`,
-  animations: [
-    trigger('openClose', [
-      state('true', style({ height: AUTO_STYLE })),
-      state('false', style({ height: 0, overflow: 'hidden' })),
-      transition(':enter', []),
-      transition('false => true', animate(`${TRANSITION_DURATION}ms ease-in`, style({ height: AUTO_STYLE }))),
-      transition(
-        'true => false',
-        group([
-          animate(`${TRANSITION_DURATION}ms ease-in`, style({ height: 0 })),
-          animate(`${TRANSITION_DURATION}ms steps(1, start)`, style({ overflow: 'hidden' })),
-        ])
-      ),
-    ]),
-    trigger('rotate', [
-      state('true', style({ transform: 'rotate(-90deg)' })),
-      transition(':enter', []),
-      transition('false <=> true', animate(`${TRANSITION_DURATION}ms ease-out`)),
-    ]),
-  ],
 })
 export class MenuItemNodeComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
