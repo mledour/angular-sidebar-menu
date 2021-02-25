@@ -35,6 +35,7 @@ export class MenuHarness extends ComponentHarness {
   getActivatedAnchorsLabels = this.locatorForAll('.asm-menu__item__anchor--active .asm-menu__item__label');
   getOpenedNodes = this.locatorForAll('.asm-menu__item__node--open');
   getOpenedNodesLabels = this.locatorForAll('.asm-menu__item__node--open > asm-menu-anchor .asm-menu__item__label');
+  getDisabledItems = this.locatorForAll('.asm-menu__item--disabled');
 
   async getItemsWith(filters: MenuItemHarnessFilters = {}): Promise<MenuItemHarness[]> {
     const getFilteredItems = this.locatorForAll(MenuItemHarness.with(filters));
