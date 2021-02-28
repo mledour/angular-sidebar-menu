@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.0.0...v1.1.0) (2021-02-28)
+
+
+### Features
+
+* **roles:** allow role 'none' if menu role is empty string ([e208cde](https://github.com/mledour/angular-sidebar-menu/commit/e208cdee1a800d0102cd94f6d1cf8b0713c1c8b6))
+* **roles:** implement menu roles settings to hide or disable menu items ([6756e9f](https://github.com/mledour/angular-sidebar-menu/commit/6756e9fc63dcc6df9e334fcc40a29038e4aa6875))
+
+
+### Performance Improvements
+
+* **animations:** handle openClose animation overflow with css ([5a77a14](https://github.com/mledour/angular-sidebar-menu/commit/5a77a1462e83fc21a77bf28a75cac55039a2e2d3))
+
 # 1.0.0 (2021-02-12)
 
 
