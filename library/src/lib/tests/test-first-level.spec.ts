@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-import { MenuHarness } from '../testing/menu.harness';
+import { MenuHarness } from '../../../testing/src/menu.harness';
 
 import { Menu, MenuItemBadge, MenuItemHeader, MenuItemLeafRoute } from '../sidebar-menu.interface';
 

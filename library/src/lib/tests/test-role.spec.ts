@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-import { MenuHarness } from '../testing/menu.harness';
+import { MenuHarness } from '../../../testing/src/menu.harness';
 
 import { Menu } from '../sidebar-menu.interface';
 
@@ -32,26 +32,26 @@ const menu: Menu = [
     roles: [Roles.ADMIN, Roles.AUTHOR],
   },
   {
-    route: '/third',
-    label: 'Third',
+    route: '/fourth',
+    label: 'Fourth',
     roles: [],
   },
   {
-    label: 'Fourth',
+    label: 'Fifth',
     roles: [Roles.AUTHOR],
-    children: [
-      {
-        route: '/fourth-child',
-        label: 'Fourth child',
-      },
-    ],
-  },
-  {
-    label: 'fifth',
     children: [
       {
         route: '/fifth-child',
         label: 'Fifth child',
+      },
+    ],
+  },
+  {
+    label: 'Sixth',
+    children: [
+      {
+        route: '/Sixth-child',
+        label: 'Sixth child',
         roles: [Roles.EDITOR],
       },
     ],
@@ -127,6 +127,6 @@ describe('first level', () => {
     fixture.detectChanges();
 
     items = await harness.getItems();
-    expect(items.length).toEqual(8);
+    expect(items.length).toEqual(5);
   });
 });
