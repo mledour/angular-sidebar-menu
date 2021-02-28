@@ -1,11 +1,14 @@
-import { DebugElement } from '@angular/core';
+import { TestElement } from '@angular/cdk/testing';
 
 export const customMatchers: jasmine.CustomMatcherFactories = {
-  toHaveClasses(util: jasmine.MatchersUtil, customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>): jasmine.CustomMatcher {
+  toHaveClasses(
+    util: jasmine.MatchersUtil,
+    customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>
+  ): jasmine.CustomMatcher {
     return {
-      compare(actual: DebugElement, expected?: string): jasmine.CustomMatcherResult {
-        if (!(actual.nativeElement.classList.contains instanceof Function)) {
-          throw new Error(util.pp(actual) + ' is not a Debug element');
+      compare(actual: TestElement, expected?: string): jasmine.CustomMatcherResult {
+        if (!(actual.hasClass instanceof Function)) {
+          throw new Error(util.pp(actual) + ' is not a TestElement');
         }
 
         const expectedClasses = (expected && expected.split(' ').filter((v) => v.length)) || [];
@@ -15,23 +18,8 @@ export const customMatchers: jasmine.CustomMatcherFactories = {
         }
 
         return {
-          pass: !expectedClasses.find((cssClass) => !actual.nativeElement.classList.contains(cssClass)),
-          message: `Expected '${actual.nativeElement.classList}' to have classes '${expected}'`,
-        };
-      },
-    };
-  },
-
-  toHaveText(util: jasmine.MatchersUtil, customEqualityTesters: ReadonlyArray<jasmine.CustomEqualityTester>): jasmine.CustomMatcher {
-    return {
-      compare(actual: DebugElement, expected?: string): jasmine.CustomMatcherResult {
-        if (!actual.nativeElement.textContent) {
-          throw new Error(util.pp(actual) + ' is not a Debug element');
-        }
-
-        return {
-          pass: actual.nativeElement.textContent === expected,
-          message: `Expected '${actual.nativeElement.textContent}' to have text '${expected}'`,
+          pass: !expectedClasses.find((cssClass) => !actual.hasClass(cssClass)),
+          message: `Expected '${actual.getAttribute('class')}' to have classes '${expected}'`,
         };
       },
     };

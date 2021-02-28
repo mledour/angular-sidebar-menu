@@ -11,18 +11,21 @@ export class MenuDefinitionComponent {
   readonly menuItemLeafRouteType = `label: string;
 iconClasses?: string;
 badges?: MenuItemBadge[];
+roles: Role[];
 route: string;
 linkActiveExact: boolean = true`;
 
   readonly menuItemLeafURLType = `label: string;
 iconClasses?: string;
 badges?: MenuItemBadge[];
+roles: Role[];
 url: string;
 target?: string;`;
 
   readonly menuItemLeafNodeType = `label: string;
 iconClasses?: string;
 badges?: MenuItemBadge[];
+roles: Role[];
 children: MenuItem[];`;
 
   readonly menuConfExample = `const menu = [
@@ -37,6 +40,7 @@ children: MenuItem[];`;
   {
     label: 'Multilevel',
     iconClasses: 'fa fa-share',
+    roles: ['ADMIN', 'EDITOR']
     children: [
       {
         label: 'Configuration 1',

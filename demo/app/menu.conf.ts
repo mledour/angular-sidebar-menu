@@ -1,4 +1,5 @@
 import { Menu } from 'angular-sidebar-menu';
+import { Roles } from './roles.enum';
 
 export const menu: Menu = [
   {
@@ -25,6 +26,7 @@ export const menu: Menu = [
   {
     label: 'Multilevel',
     iconClasses: 'fa fa-share',
+    roles: [],
     children: [
       {
         label: 'Level One',
@@ -116,6 +118,39 @@ export const menu: Menu = [
       {
         label: 'Route ID Three',
         route: '/route-id-one/3',
+      },
+    ],
+  },
+  {
+    label: 'Admin',
+    iconClasses: 'fa fa-user-plus',
+    route: 'admin',
+    roles: [Roles.ADMIN],
+    badges: [
+      {
+        label: 'admin',
+        classes: 'badge--red',
+      },
+    ],
+  },
+  {
+    label: 'Roles',
+    iconClasses: 'fa fa-lock',
+    children: [
+      {
+        label: 'Admin & Editor',
+        route: '/roles/admin-editor',
+        roles: [Roles.ADMIN, Roles.EDITOR],
+      },
+      {
+        label: 'Admin',
+        route: '/roles/admin',
+        roles: [Roles.ADMIN],
+      },
+      {
+        label: 'Editor',
+        route: '/roles/editor',
+        roles: [Roles.EDITOR],
       },
     ],
   },

@@ -8,11 +8,12 @@ import { MenuItemNodeService } from './menu-item-node.service';
 import { MenuItemNodeComponent } from './menu-item-node.component';
 import { MenuItemAnchorComponent } from './menu-item-anchor.component';
 import { MenuItemAnchorService } from './menu-item-anchor.service';
+import { MenuItemRoleService } from './menu-item-role.service';
 
 @NgModule({
   declarations: [SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
   imports: [RouterModule, CommonModule],
-  providers: [MenuItemNodeService, MenuItemAnchorService],
+  providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
   exports: [SidebarMenuComponent],
 })
 export class SidebarMenuModule {}

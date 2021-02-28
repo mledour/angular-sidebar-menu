@@ -27,6 +27,22 @@
   }
 }
 
+.asm-menu__item--disabled {
+  opacity: 0.5;
+
+  .asm-menu__item__anchor[href]:hover,
+  .asm-menu__item__anchor[routerLink]:hover {
+    cursor: not-allowed;
+  }
+  .asm-menu__item__anchor:hover {
+    background: inherit;
+    color: #b8c7ce;
+  }
+  .asm-menu__item__node ul .asm-menu__item__anchor {
+    color: #8aa4af !important;
+  }
+}
+
 .asm-menu__item__node ul {
   background: #2c3b41;
   padding-left: 5px !important;

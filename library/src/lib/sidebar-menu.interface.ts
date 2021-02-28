@@ -1,3 +1,7 @@
+import { Role } from './menu-item-role.service';
+
+export type UnAuthorizedVisibility = 'hidden' | 'disabled';
+
 export interface MenuItemBadge {
   label: string;
   classes: string;
@@ -7,6 +11,7 @@ export interface MenuItemBase {
   label: string;
   iconClasses?: string;
   badges?: MenuItemBadge[];
+  roles?: Role[];
 }
 
 export interface MenuItemLeafRoute extends MenuItemBase {

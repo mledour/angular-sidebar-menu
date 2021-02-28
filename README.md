@@ -30,12 +30,12 @@ npm install angular-sidebar-menu --save
 
 | Feature Name        |                                                 Description                                                  |       Status       |
 | ------------------- | :----------------------------------------------------------------------------------------------------------: | :----------------: |
-| multi-level         |                                       Multi-level menu implementation                                        | :white_check_mark: |
-| animation           |                                        Multi-level collapse animation                                        | :white_check_mark: |
-| item icon           |                                 Allow global and per item icon configuration                                 | :white_check_mark: |
-| external link       |                             Allow external link with target property definition                              | :white_check_mark: |
-| clickable node item |                  Allow a node menu item to navigate to configured route and expand children                  |                    |
-| route guards        |                                  Disable or hide item based on route guards                                  |                    |
+| Multi-level         |                                       Multi-level menu implementation                                        | :white_check_mark: |
+| Animation           |                                        Multi-level collapse animation                                        | :white_check_mark: |
+| Item icon           |                                 Allow global and per item icon configuration                                 | :white_check_mark: |
+| External link       |                             Allow external link with target property definition                              | :white_check_mark: |
+| Roles               |                             Disable or hide menu items based on roles definition                             | :white_check_mark: |
+| Clickable node item |                  Allow a node menu item to navigate to configured route and expand children                  |                    |
 | RTL                 |                                            Right to Left Support                                             |                    |
 | Search              |                                     Filter menu items with custom input                                      |                    |
 | I18n                |                                           Allow i18n translations                                            |                    |

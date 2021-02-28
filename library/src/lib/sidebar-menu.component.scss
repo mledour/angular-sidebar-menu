@@ -7,6 +7,11 @@
     padding: 0;
   }
 
+  .asm-menu__item__node:not(.asm-menu__item__node--open) > .ng-trigger-openClose,
+  .asm-menu__item__node > .ng-trigger-openClose.ng-animating {
+    overflow: hidden;
+  }
+
   .asm-menu,
   .asm-menu__item__node ul {
     list-style: none;

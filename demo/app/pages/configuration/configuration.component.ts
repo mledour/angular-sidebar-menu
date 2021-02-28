@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
 })
 export class ConfigurationComponent {
   readonly example =
-    '<asm-angular-sidebar-menu [menu]="menu" toggleIconClasses="fa fa-angle-left" iconClasses="fa fa-circle-o"></asm-angular-sidebar-menu>';
+    '<asm-angular-sidebar-menu [menu]="menu" [role]="ADMIN" toggleIconClasses="fa fa-angle-left" iconClasses="fa fa-circle-o"></asm-angular-sidebar-menu>';
 }
