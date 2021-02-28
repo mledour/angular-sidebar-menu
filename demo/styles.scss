@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';
+@import 'styles/material';
+
 @import '~normalize.css/normalize.css';
 @import '~prism-themes/themes/prism-vs.css';
 
@@ -16,21 +19,7 @@ body {
   font-weight: 300;
   color: #495057;
   font-size: 14px;
-  font-family:
-    // Safari for OS X and iOS (San Francisco)
-    -apple-system,
-    // Chrome < 56 for OS X (San Francisco)
-    BlinkMacSystemFont,
-    // Windows
-    'Segoe UI',
-    // Android
-    'Roboto',
-    // Basic web fallback
-    'Helvetica Neue',
-    Arial, sans-serif,
-    // Emoji fonts
-    'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: $font-family;
 }
 
 pre[class*='language-'] {

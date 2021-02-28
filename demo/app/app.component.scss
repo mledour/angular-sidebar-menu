@@ -11,7 +11,31 @@
     width: 230px;
   }
 
-  .app-sidenav-content {
+  .app-sidenav-content > header {
+    border-bottom: 1px solid #dfdfdf;
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding: 0;
+      border-right: 1px solid #dfdfdf;
+
+      .mat-form-field-flex {
+        background: none;
+      }
+      .mat-form-field-underline {
+        display: none;
+      }
+      .mat-form-field-suffix {
+        top: -0.6em !important;
+        color: #777;
+        font-size: 12px;
+      }
+      .mat-select-arrow {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .app-sidenav-content > main {
     padding: 2rem;
   }
 }

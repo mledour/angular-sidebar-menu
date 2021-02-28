@@ -2,11 +2,35 @@
   <mat-sidenav class="app-sidenav" mode="side" opened
     ><asm-angular-sidebar-menu
       [menu]="menu"
+      [unAuthorizedVisibility]="visibility.value"
+      [role]="currentRole"
       toggleIconClasses="fa fa-angle-left"
       iconClasses="fa fa-circle-o"
     ></asm-angular-sidebar-menu
   ></mat-sidenav>
   <mat-sidenav-content class="app-sidenav-content">
-    <router-outlet></router-outlet>
+    <header>
+      <mat-form-field appearance="fill">
+        <i matSuffix class="fa fa-chevron-down"></i>
+        <mat-label>Role</mat-label>
+        <mat-select [(value)]="currentRole" #role>
+          <mat-option [value]="undefined">Disabled</mat-option>
+          <mat-option value="">None</mat-option>
+          <mat-option [value]="roles.ADMIN">Admin</mat-option>
+          <mat-option [value]="roles.EDITOR">Editor</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <i matSuffix class="fa fa-chevron-down"></i>
+        <mat-label>Visibility</mat-label>
+        <mat-select value="disabled" #visibility>
+          <mat-option value="hidden">Hidden</mat-option>
+          <mat-option value="disabled">Disabled</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
