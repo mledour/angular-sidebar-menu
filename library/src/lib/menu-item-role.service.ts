@@ -12,7 +12,7 @@ export class MenuItemRoleService {
   private role$ = new BehaviorSubject<Role | undefined>(undefined);
   private unAuthorizedVisibility$ = new BehaviorSubject<UnAuthorizedVisibility>('hidden');
 
-  set role(role: Role) {
+  set role(role: Role | undefined) {
     this.role$.next(role);
   }
 
@@ -41,8 +41,12 @@ export class MenuItemRoleService {
     ]).pipe(map((value) => ({ isAuthorized: value[0], unAuthorizedVisibility: value[1] })));
   }
 
+  private isRole(role?: Role): boolean {
+    return typeof role === 'string' || typeof role === 'number';
+  }
+
   private isAuthorized(userRole?: Role, itemRoles?: Role[]): boolean {
-    if (!userRole || !itemRoles || itemRoles.length === 0) {
+    if (!this.isRole(userRole) || !itemRoles || itemRoles.length === 0) {
       return true;
     }
 
