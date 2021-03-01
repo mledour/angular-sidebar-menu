@@ -14,6 +14,7 @@ import { MenuItemRoleService, Role } from './menu-item-role.service';
       <li asm-menu-item *ngIf="menuItemService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
     </ng-container>
   </ul>`,
+  providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
 })
 export class SidebarMenuComponent {
   @Input() menu!: Menu;
