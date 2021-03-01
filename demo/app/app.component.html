@@ -1,6 +1,7 @@
 <mat-sidenav-container class="app-sidenav-container">
   <mat-sidenav class="app-sidenav" mode="side" opened
     ><asm-angular-sidebar-menu
+      *ngIf="menuConfService.menu$ | async as menu"
       [menu]="menu"
       [unAuthorizedVisibility]="visibility.value"
       [role]="currentRole"
@@ -13,7 +14,7 @@
       <mat-form-field appearance="fill">
         <i matSuffix class="fa fa-chevron-down"></i>
         <mat-label>Role</mat-label>
-        <mat-select [(value)]="currentRole" #role>
+        <mat-select [(value)]="currentRole">
           <mat-option [value]="undefined">Disabled</mat-option>
           <mat-option value="">None</mat-option>
           <mat-option [value]="roles.ADMIN">Admin</mat-option>
@@ -26,6 +27,14 @@
         <mat-select value="disabled" #visibility>
           <mat-option value="hidden">Hidden</mat-option>
           <mat-option value="disabled">Disabled</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <i matSuffix class="fa fa-chevron-down"></i>
+        <mat-label>Menu Lang</mat-label>
+        <mat-select [value]="lang" (selectionChange)="onLangChange($event)">
+          <mat-option value="en">En</mat-option>
+          <mat-option value="fr">Fr</mat-option>
         </mat-select>
       </mat-form-field>
     </header>

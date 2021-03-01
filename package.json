@@ -11,7 +11,9 @@
     "semantic-release": "semantic-release",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "prettier:check": "prettier --config .prettierrc.yml --check --ignore-unknown .",
-    "prettier:write": "prettier --config .prettierrc.yml --write --ignore-unknown ."
+    "prettier:write": "prettier --config .prettierrc.yml --write --ignore-unknown .",
+    "i18n:extract": "transloco-keys-manager extract --translations-path src/assets/i18n/ --langs en fr",
+    "i18n:find": "transloco-keys-manager find"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
     "@angular/platform-browser": "~11.1.0",
     "@angular/platform-browser-dynamic": "~11.1.0",
     "@angular/router": "~11.1.0",
+    "@ngneat/transloco": "^2.20.1",
     "@types/prismjs": "^1.16.2",
     "font-awesome": "^4.7.0",
     "normalize.css": "^8.0.1",
@@ -41,6 +44,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/travis-cli": "^11.0.0",
+    "@ngneat/transloco-keys-manager": "^2.7.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "@types/jasmine": "~3.6.0",
