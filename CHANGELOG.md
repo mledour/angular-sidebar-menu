@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.1.0...v1.2.0) (2021-03-01)
+
+
+### Features
+
+* allow multiple independent instances ([c49c580](https://github.com/mledour/angular-sidebar-menu/commit/c49c580d46bf48360078ad2bd691f55be756a1d2))
+
 # [1.1.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.0.0...v1.1.0) (2021-02-28)
 
 
