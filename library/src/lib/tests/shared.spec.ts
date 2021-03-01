@@ -6,9 +6,7 @@ import { SidebarMenuComponent } from '../sidebar-menu.component';
 import { MenuItemComponent } from '../menu-item.component';
 import { MenuItemNodeComponent } from '../menu-item-node.component';
 import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
-import { MenuItemNodeService } from '../menu-item-node.service';
-import { MenuItemAnchorService } from '../menu-item-anchor.service';
-import { MenuItemRoleService, Role } from '../menu-item-role.service';
+import { Role } from '../menu-item-role.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestModuleMetadata } from '@angular/core/testing';
@@ -41,6 +39,5 @@ export const sharedTestingModuleFactory = (): TestModuleMetadata => ({
     MenuItemNodeComponent,
     MenuItemAnchorComponent,
   ],
-  providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
   imports: [RouterTestingModule.withRoutes(routes), NoopAnimationsModule],
 });

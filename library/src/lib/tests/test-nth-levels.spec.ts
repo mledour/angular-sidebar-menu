@@ -90,13 +90,11 @@ describe('nth levels', () => {
   });
 
   it('should create 4 menu items', async () => {
-    const items = await harness.getItems();
-    expect(items.length).toEqual(menuItemsCount(menu));
+    expect((await harness.getItems()).length).toEqual(menuItemsCount(menu));
   });
 
   it('should click third level item and navigate', async () => {
-    const items = await harness.getActivatedAnchors();
-    expect(items.length).toEqual(1);
+    expect((await harness.getActivatedAnchors()).length).toEqual(1);
 
     // Open first level node
     await harness.clickItemWith({ label: menu[1].label });

@@ -58,13 +58,12 @@ describe('first level', () => {
   });
 
   it('should create 4 menu items', async () => {
-    const items = await harness.getItems();
-    expect(items.length).toEqual(menu.length);
+    expect((await harness.getItems()).length).toEqual(menu.length);
   });
 
   it('should have root menu item activated on init', async () => {
     const items = await harness.getActivatedAnchors();
-    expect(items.length).toEqual(1);
+    expect((await harness.getActivatedAnchors()).length).toEqual(1);
 
     const label = await items[0].text();
     expect(label).toEqual(menu[0].label as string);
@@ -74,8 +73,7 @@ describe('first level', () => {
     const itemConf = menu[1] as MenuItemLeafRoute;
     await router.navigateByUrl(itemConf.route);
 
-    const items = await harness.getActivatedAnchors();
-    expect(items.length).toEqual(1);
+    expect((await harness.getActivatedAnchors()).length).toEqual(1);
 
     const label = await harness.getActivatedAnchorsLabels();
     expect(label.length).toEqual(1);
@@ -89,8 +87,7 @@ describe('first level', () => {
 
     await link.click();
 
-    const items = await harness.getActivatedAnchors();
-    expect(items.length).toEqual(1);
+    expect((await harness.getActivatedAnchors()).length).toEqual(1);
 
     const label = await harness.getActivatedAnchorsLabels();
     expect(label.length).toEqual(1);
