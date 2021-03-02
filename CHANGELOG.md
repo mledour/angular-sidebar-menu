@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.0...v1.2.1) (2021-03-02)
+
+
+### Bug Fixes
+
+* menu creation after navigationEnd ([6a2439e](https://github.com/mledour/angular-sidebar-menu/commit/6a2439e0427bdcef91557218821adf2670d1c733))
+
 # [1.2.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.1.0...v1.2.0) (2021-03-01)
 
 
