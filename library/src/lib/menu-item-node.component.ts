@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -12,6 +21,7 @@ import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
   // tslint:disable-next-line:component-selector
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<div class="asm-menu__item__node" [ngClass]="{ 'asm-menu__item__node--open': isOpen }">
     <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
       <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
@@ -45,7 +55,11 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
   private onDestroy$ = new Subject();
   private isChildActiveDone = false;
 
-  constructor(public menuItemNodeService: MenuItemNodeService, public menuItemRoleService: MenuItemRoleService) {}
+  constructor(
+    public menuItemNodeService: MenuItemNodeService,
+    public menuItemRoleService: MenuItemRoleService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.menuItemNodeService.openedNode
@@ -57,6 +71,7 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
       .subscribe((node) => {
         if (node.nodeLevel <= this.level) {
           this.isOpen = false;
+          this.changeDetectorRef.markForCheck();
         }
       });
   }

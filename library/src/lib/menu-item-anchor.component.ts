@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { MenuItem } from './sidebar-menu.interface';
 import { MenuItemAnchorService } from './menu-item-anchor.service';
 
 @Component({
   selector: 'asm-menu-anchor',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-container [ngSwitch]="true">
       <a
         *ngSwitchCase="!!menuItem.children"

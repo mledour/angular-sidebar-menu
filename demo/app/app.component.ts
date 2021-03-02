@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { menu } from './menu.conf';
+import { MatSelectChange } from '@angular/material/select';
+import { TranslocoService } from '@ngneat/transloco';
+import { MenuConfService } from './menu-conf.service';
 import { Roles } from './roles.enum';
 
 @Component({
@@ -9,8 +11,13 @@ import { Roles } from './roles.enum';
 })
 export class AppComponent {
   title = 'angular-sidebar-menu';
-  menu = menu;
   roles = Roles;
-
   currentRole = Roles.EDITOR;
+  lang = this.translationService.getDefaultLang();
+
+  constructor(public menuConfService: MenuConfService, private translationService: TranslocoService) {}
+
+  onLangChange(event: MatSelectChange): void {
+    this.translationService.setActiveLang(event.value);
+  }
 }
