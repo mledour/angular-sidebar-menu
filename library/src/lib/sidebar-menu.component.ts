@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentInit, Component, Input } from '@angular/core';
 
 import { MenuItemAnchorService } from './menu-item-anchor.service';
 import { MenuItemNodeService } from './menu-item-node.service';
@@ -9,14 +9,14 @@ import { MenuItemRoleService, Role } from './menu-item-role.service';
 @Component({
   selector: 'asm-angular-sidebar-menu',
   styleUrls: ['sidebar-menu.component.scss'],
-  template: `<ul class="asm-menu">
+  template: `<ul class="asm-menu" [@.disabled]="disableAnimations">
     <ng-container *ngFor="let item of menu">
       <li asm-menu-item *ngIf="menuItemService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
     </ng-container>
   </ul>`,
   providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
 })
-export class SidebarMenuComponent {
+export class SidebarMenuComponent implements AfterContentInit {
   @Input() menu!: Menu;
   @Input() set iconClasses(cssClasses: string) {
     this.menuItemAnchorService.iconClasses = cssClasses;
@@ -31,9 +31,17 @@ export class SidebarMenuComponent {
     this.menuItemService.unAuthorizedVisibility = visibility;
   }
 
+  disableAnimations = true;
+
   constructor(
     private menuItemAnchorService: MenuItemAnchorService,
     private menuItemNodeService: MenuItemNodeService,
     public menuItemService: MenuItemRoleService
   ) {}
+
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this.disableAnimations = false;
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
@@ -44,11 +44,11 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
   private onDestroy$ = new Subject();
 
-  constructor(private router: Router, public menuItemRoleService: MenuItemRoleService) {}
-
-  isChildItemActive(event: boolean): void {
-    this.isItemActive.emit(event);
-  }
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
+    public menuItemRoleService: MenuItemRoleService
+  ) {}
 
   ngOnInit(): void {
     this.router.events
@@ -56,17 +56,39 @@ export class MenuItemComponent implements OnInit, OnDestroy {
         filter((e: RouterEvent): e is NavigationEnd => e instanceof NavigationEnd),
         takeUntil(this.onDestroy$)
       )
-      .subscribe(() => {
-        if (this.menuItem.route) {
-          this.isItemActive.emit(this.router.isActive(this.menuItem.route, true));
-        } else if (this.menuItem.url) {
-          this.isItemActive.emit(false);
-        }
+      .subscribe((e) => {
+        this.emitItemActive();
       });
+
+    this.emitItemActive();
+
+    if (this.menuItem.children) {
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   ngOnDestroy(): void {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  isChildItemActive(event: boolean): void {
+    this.isItemActive.emit(event);
+  }
+
+  private emitItemActive(): void {
+    if (this.menuItem.route) {
+      this.isItemActive.emit(this.isActiveRoute(this.menuItem.route));
+    } else if (this.menuItem.url) {
+      this.isItemActive.emit(false);
+    }
+  }
+
+  private isActiveRoute(route: string): boolean {
+    return this.router.isActive(route, this.isItemLinkExact());
+  }
+
+  private isItemLinkExact(): boolean {
+    return this.menuItem.linkActiveExact === undefined ? true : this.menuItem.linkActiveExact;
   }
 }

@@ -38,8 +38,9 @@ export class MenuItemNodeComponent implements OnInit, OnDestroy {
 
   @Output() isItemActive = new EventEmitter<boolean>();
 
-  isOpen?: boolean;
-  isActiveChild?: boolean;
+  isOpen = false;
+  isActiveChild = false;
+  disableAnimations = true;
 
   private onDestroy$ = new Subject();
   private isChildActiveDone = false;
