@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MenuItemAnchorService } from './menu-item-anchor.service';
 import { MenuItemNodeService } from './menu-item-node.service';
@@ -16,8 +16,15 @@ import { MenuItemRoleService, Role } from './menu-item-role.service';
   </ul>`,
   providers: [MenuItemNodeService, MenuItemAnchorService, MenuItemRoleService],
 })
-export class SidebarMenuComponent implements AfterContentInit {
-  @Input() menu!: Menu;
+export class SidebarMenuComponent {
+  @Input('menu') set _menu(menu: Menu) {
+    this.disableAnimations = true;
+    this.menu = menu;
+
+    setTimeout(() => {
+      this.disableAnimations = false;
+    });
+  }
   @Input() set iconClasses(cssClasses: string) {
     this.menuItemAnchorService.iconClasses = cssClasses;
   }
@@ -31,6 +38,7 @@ export class SidebarMenuComponent implements AfterContentInit {
     this.menuItemService.unAuthorizedVisibility = visibility;
   }
 
+  menu?: Menu;
   disableAnimations = true;
 
   constructor(
@@ -38,10 +46,4 @@ export class SidebarMenuComponent implements AfterContentInit {
     private menuItemNodeService: MenuItemNodeService,
     public menuItemService: MenuItemRoleService
   ) {}
-
-  ngAfterContentInit(): void {
-    setTimeout(() => {
-      this.disableAnimations = false;
-    });
-  }
 }
