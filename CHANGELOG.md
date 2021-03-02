@@ -1,3 +1,15 @@
+## [1.2.2](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.1...v1.2.2) (2021-03-02)
+
+
+### Bug Fixes
+
+* animation when menu change ([440c32f](https://github.com/mledour/angular-sidebar-menu/commit/440c32fa3ad7294bc3052959efc13c9244cf3160))
+
+
+### Performance Improvements
+
+* changeDetectionStrategy to OnPush for menu components ([3e6e86a](https://github.com/mledour/angular-sidebar-menu/commit/3e6e86af83553d02bfbc25d7c598f3077339e75e))
+
 ## [1.2.1](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.0...v1.2.1) (2021-03-02)
 
 
