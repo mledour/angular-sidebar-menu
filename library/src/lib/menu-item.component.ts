@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
@@ -10,6 +19,7 @@ import { MenuItem } from './sidebar-menu.interface';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'li[asm-menu-item][menuItem]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
       *ngIf="{ disabled: (menuItemRoleService.disableItem$(menuItem.roles) | async) === true } as role"
