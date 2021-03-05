@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.2...v1.3.0) (2021-03-05)
+
+
+### Features
+
+* menu item search ([7651cf2](https://github.com/mledour/angular-sidebar-menu/commit/7651cf251e4c87fa58e996ba04d2fa47aa355f4a))
+
+
+### Performance Improvements
+
+* better changeDetection strategy with Subject instead of EventEmitter for items ([a5edfdd](https://github.com/mledour/angular-sidebar-menu/commit/a5edfdda2fccec5467500d7d186b19a24d58b8be))
+
 ## [1.2.2](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.1...v1.2.2) (2021-03-02)
 
 
