@@ -1,17 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 import { MenuItemRoleService } from './menu-item-role.service';
 import { MenuItem } from './sidebar-menu.interface';
@@ -33,7 +24,7 @@ import { MenuItem } from './sidebar-menu.interface';
         [menuItem]="menuItem"
         [level]="level"
         [itemDisabled]="itemDisabled || role.disabled"
-        (isItemActive)="isChildItemActive($event)"
+        (isActive)="onNodeActive($event)"
       ></asm-menu-node>
       <asm-menu-anchor
         *ngSwitchDefault
@@ -44,21 +35,17 @@ import { MenuItem } from './sidebar-menu.interface';
   `,
 })
 export class MenuItemComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line:no-input-rename
   @Input() menuItem!: MenuItem;
   @Input() isRootNode = true;
   @Input() level!: number;
   @Input() itemDisabled?: boolean;
 
-  @Output() isItemActive = new EventEmitter<boolean>();
-
   private onDestroy$ = new Subject();
+  private isActive = new BehaviorSubject(false);
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private router: Router,
-    public menuItemRoleService: MenuItemRoleService
-  ) {}
+  isActive$ = this.isActive.asObservable().pipe(distinctUntilChanged(), takeUntil(this.onDestroy$));
+
+  constructor(private router: Router, public menuItemRoleService: MenuItemRoleService) {}
 
   ngOnInit(): void {
     this.router.events
@@ -71,10 +58,6 @@ export class MenuItemComponent implements OnInit, OnDestroy {
       });
 
     this.emitItemActive();
-
-    if (this.menuItem.children) {
-      this.changeDetectorRef.detectChanges();
-    }
   }
 
   ngOnDestroy(): void {
@@ -82,15 +65,13 @@ export class MenuItemComponent implements OnInit, OnDestroy {
     this.onDestroy$.complete();
   }
 
-  isChildItemActive(event: boolean): void {
-    this.isItemActive.emit(event);
+  onNodeActive(event: boolean): void {
+    this.isActive.next(event);
   }
 
   private emitItemActive(): void {
     if (this.menuItem.route) {
-      this.isItemActive.emit(this.isActiveRoute(this.menuItem.route));
-    } else if (this.menuItem.url) {
-      this.isItemActive.emit(false);
+      this.isActive.next(this.isActiveRoute(this.menuItem.route));
     }
   }
 
