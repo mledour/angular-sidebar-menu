@@ -37,8 +37,8 @@ npm install angular-sidebar-menu --save
 | Roles               |                             Disable or hide menu items based on roles definition                             | :white_check_mark: |
 | Multiple instances  |                                  Allow multiple independent menu instances                                   | :white_check_mark: |
 | I18n                |                               Allow compile-time and runtime i18n translations                               | :white_check_mark: |
-| Clickable node item |                  Allow a node menu item to navigate to configured route and expand children                  |                    |
+| Search              |                             Allow filtering menu items with component text input                             | :white_check_mark: |
+| Clickable node item |                 Allow a node menu item to navigate to a configured route and expand children                 |                    |
 | RTL                 |                                            Right to Left Support                                             |                    |
-| Search              |                                     Filter menu items with custom input                                      |                    |
 | Menu mini           | Allow minification of the menu to show only the icons for the first level items and display submenu on hover |                    |
 | Mobile compatible   |                                     Menu compatible with mobile devices                                      |                    |

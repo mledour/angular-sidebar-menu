@@ -9,6 +9,32 @@
   .app-sidenav {
     background: #222d32;
     width: 230px;
+
+    .input-search {
+      display: flex;
+      margin: 10px;
+      background-color: #374850;
+      align-items: center;
+      border-radius: 2px;
+      color: #666;
+
+      &.input-search--focus {
+        background: #fff;
+      }
+
+      input {
+        padding: 10px;
+      }
+
+      i,
+      input::placeholder {
+        color: #999;
+      }
+
+      i {
+        margin: 0 10px;
+      }
+    }
   }
 
   .app-sidenav-content > header {

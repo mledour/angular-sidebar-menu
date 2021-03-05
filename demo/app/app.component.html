@@ -1,10 +1,22 @@
 <mat-sidenav-container class="app-sidenav-container">
   <mat-sidenav class="app-sidenav" mode="side" opened
-    ><asm-angular-sidebar-menu
+    ><div class="input-search" [ngClass]="{ 'input-search--focus': inputSearchFocus }">
+      <input
+        matInput
+        placeholder="Search..."
+        type="text"
+        (keyup)="currentSearch = $any($event.target).value"
+        (focusin)="inputSearchFocus = true"
+        (focusout)="inputSearchFocus = false"
+      />
+      <i class="fa fa-search"></i>
+    </div>
+    <asm-angular-sidebar-menu
       *ngIf="menuConfService.menu$ | async as menu"
       [menu]="menu"
       [unAuthorizedVisibility]="visibility.value"
       [role]="currentRole"
+      [search]="currentSearch"
       toggleIconClasses="fa fa-angle-left"
       iconClasses="fa fa-circle-o"
     ></asm-angular-sidebar-menu

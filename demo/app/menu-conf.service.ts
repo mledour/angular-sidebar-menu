@@ -19,17 +19,17 @@ export class MenuConfService {
         header: translate<string>('DOCUMENTATION'),
       },
       {
-        label: translate<string>('GET_STARTED'),
+        label: translate('GET_STARTED'),
         route: '/',
         iconClasses: 'fa fa-rocket',
       },
       {
-        label: this.translationService.translate<string>('CONFIGURATION'),
+        label: this.translationService.translate('CONFIGURATION'),
         route: '/configuration',
         iconClasses: 'fa fa-cog',
       },
       {
-        label: this.translationService.translate<string>('MENU_DEFINITION'),
+        label: this.translationService.translate('MENU_DEFINITION'),
         route: '/menu-definition',
         iconClasses: 'fa fa-cube',
       },
@@ -42,7 +42,7 @@ export class MenuConfService {
         roles: [],
         children: [
           {
-            label: this.translationService.translate<string>('LEVEL_ONE'),
+            label: this.translationService.translate('LEVEL_ONE'),
             route: '/level-one',
             badges: [
               {
@@ -58,15 +58,15 @@ export class MenuConfService {
                 label: this.translationService.translate<string>('LEVEL_TWO'),
                 children: [
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-1',
                   },
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-2',
                   },
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-3',
                   },
                 ],
@@ -75,34 +75,34 @@ export class MenuConfService {
                 label: this.translationService.translate<string>('LEVEL_TWO'),
                 children: [
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-2-1',
                   },
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-2-2',
                   },
                   {
-                    label: this.translationService.translate<string>('LEVEL_THREE'),
+                    label: this.translationService.translate('LEVEL_THREE'),
                     route: '/level-three-2-3',
                   },
                 ],
               },
               {
-                label: this.translationService.translate<string>('LEVEL_TWO'),
+                label: this.translationService.translate('LEVEL_TWO'),
                 route: '/level-two-1',
               },
               {
-                label: this.translationService.translate<string>('LEVEL_TWO'),
+                label: this.translationService.translate('LEVEL_TWO'),
                 route: '/level-two-2',
               },
             ],
           },
           {
-            header: this.translationService.translate<string>(['LEVEL', 'ONE', 'HEADER']),
+            header: this.translationService.translate<string>('LEVEL_ONE_HEADER'),
           },
           {
-            label: this.translationService.translate<string>('LEVEL_ONE'),
+            label: this.translationService.translate('LEVEL_ONE'),
             route: '/level-one-2',
           },
         ],
@@ -115,27 +115,27 @@ export class MenuConfService {
             label: this.translationService.translate<string>('ROUTE_ID'),
             children: [
               {
-                label: this.translationService.translate<string>('SUB_ROUTE_ID_ONE'),
+                label: this.translationService.translate('SUB_ROUTE_ID_ONE'),
                 route: '/route-id/route-id-two/1',
               },
             ],
           },
           {
-            label: this.translationService.translate<string>('ROUTE_ID_ONE'),
+            label: this.translationService.translate('ROUTE_ID_ONE'),
             route: '/route-id-one/1',
           },
           {
-            label: this.translationService.translate<string>('ROUTE_ID_TWO'),
+            label: this.translationService.translate('ROUTE_ID_TWO'),
             route: '/route-id-one/2',
           },
           {
-            label: this.translationService.translate<string>('ROUTE_ID_THREE'),
+            label: this.translationService.translate('ROUTE_ID_THREE'),
             route: '/route-id-one/3',
           },
         ],
       },
       {
-        label: this.translationService.translate<string>('ADMIN'),
+        label: this.translationService.translate('ADMIN'),
         iconClasses: 'fa fa-user-plus',
         route: 'admin',
         roles: [Roles.ADMIN],
@@ -151,30 +151,30 @@ export class MenuConfService {
         iconClasses: 'fa fa-lock',
         children: [
           {
-            label: this.translationService.translate<string>('ADMIN_AND_EDITOR'),
+            label: this.translationService.translate('ADMIN_AND_EDITOR'),
             route: '/roles/admin-editor',
             roles: [Roles.ADMIN, Roles.EDITOR],
           },
           {
-            label: this.translationService.translate<string>('ADMIN'),
+            label: this.translationService.translate('ADMIN'),
             route: '/roles/admin',
             roles: [Roles.ADMIN],
           },
           {
-            label: this.translationService.translate<string>('EDITOR'),
+            label: this.translationService.translate('EDITOR'),
             route: '/roles/editor',
             roles: [Roles.EDITOR],
           },
         ],
       },
       {
-        label: this.translationService.translate<string>('CHILD_ROUTES'),
+        label: this.translationService.translate('CHILD_ROUTES'),
         iconClasses: 'fa fa-level-down',
         route: 'child-routes',
         linkActiveExact: false,
       },
       {
-        label: this.translationService.translate<string>('BADGES'),
+        label: this.translationService.translate('BADGES'),
         iconClasses: 'fa fa-star',
         route: 'badges',
         badges: [
@@ -189,7 +189,7 @@ export class MenuConfService {
         ],
       },
       {
-        label: this.translationService.translate<string>('EXTERNAL_LINK'),
+        label: this.translationService.translate('EXTERNAL_LINK'),
         iconClasses: 'fa fa-external-link',
         url: '//google.com',
       },
