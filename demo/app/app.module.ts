@@ -6,6 +6,7 @@ import { environment } from 'demo/environments/environment';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -40,6 +41,7 @@ import { StubComponentComponent } from './pages/stub-component/stub-component.co
     MatSidenavModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatInputModule,
     AppRoutingModule,
     SidebarMenuModule,
   ],

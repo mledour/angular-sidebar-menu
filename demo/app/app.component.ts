@@ -14,6 +14,8 @@ export class AppComponent {
   roles = Roles;
   currentRole = Roles.EDITOR;
   lang = this.translationService.getDefaultLang();
+  currentSearch?: string;
+  inputSearchFocus = false;
 
   constructor(public menuConfService: MenuConfService, private translationService: TranslocoService) {}
 

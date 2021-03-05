@@ -12,6 +12,11 @@
     overflow: hidden;
   }
 
+  .asm-menu__item--filtered,
+  .asm-menu__item__node--filtered {
+    display: none;
+  }
+
   .asm-menu,
   .asm-menu__item__node ul {
     list-style: none;

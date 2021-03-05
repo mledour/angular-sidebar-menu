@@ -21,6 +21,7 @@
   "ROUTE_ID_THREE": "{{ROUTE_ID}} {{THREE}}",
   "HEADER": "Header",
   "LEVEL": "Level",
+  "LEVEL_ONE_HEADER": "{{LEVEL}} {{ONE}} {{HEADER}}",
   "LEVEL_ONE": "{{LEVEL}} {{ONE}}",
   "LEVEL_TWO": "{{LEVEL}} {{TWO}}",
   "LEVEL_THREE": "{{LEVEL}} {{THREE}}",

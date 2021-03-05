@@ -11,6 +11,7 @@ class MenuItemHarness extends ComponentHarness {
   getLabelElement = this.locatorFor('.asm-menu__item__label, .asm-menu__item__header');
   getAnchorElement = this.locatorFor('.asm-menu__item__anchor');
   getBadgesElement = this.locatorForAll('.asm-badges__badge');
+  getWrapper = this.locatorFor('.asm-menu__item');
 
   static with(options: MenuItemHarnessFilters): HarnessPredicate<MenuItemHarness> {
     return new HarnessPredicate(MenuItemHarness, options).addOption('label', options.label, (harness, label) =>
@@ -21,6 +22,11 @@ class MenuItemHarness extends ComponentHarness {
   async getItemLabel(): Promise<string> {
     const el = await this.getLabelElement();
     return el.text();
+  }
+
+  async isFiltered(): Promise<boolean> {
+    const el = await this.getWrapper();
+    return el.hasClass('asm-menu__item--filtered');
   }
 }
 
@@ -36,6 +42,8 @@ export class MenuHarness extends ComponentHarness {
   getOpenedNodes = this.locatorForAll('.asm-menu__item__node--open');
   getOpenedNodesLabels = this.locatorForAll('.asm-menu__item__node--open > asm-menu-anchor .asm-menu__item__label');
   getDisabledItems = this.locatorForAll('.asm-menu__item--disabled');
+  getFilteredItems = this.locatorForAll('.asm-menu__item--filtered');
+  getFilteredNodes = this.locatorForAll('.asm-menu__item__node--filtered');
 
   async getItemsWith(filters: MenuItemHarnessFilters = {}): Promise<MenuItemHarness[]> {
     const getFilteredItems = this.locatorForAll(MenuItemHarness.with(filters));
