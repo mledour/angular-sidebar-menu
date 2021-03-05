@@ -6,7 +6,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   ViewChildren,
@@ -26,7 +25,10 @@ import { MenuItemComponent } from './menu-item.component';
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<div class="asm-menu__item__node" [ngClass]="{ 'asm-menu__item__node--open': isOpen }">
+  template: ` <div
+    class="asm-menu__item__node"
+    [ngClass]="{ 'asm-menu__item__node--open': isOpen, 'asm-menu__item__node--filtered': isItemsFiltered }"
+  >
     <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
       <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
@@ -43,16 +45,19 @@ import { MenuItemComponent } from './menu-item.component';
     </ul>
   </div>`,
 })
-export class MenuItemNodeComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() level!: number;
   @Input() itemDisabled?: boolean;
 
   @Output() isActive = new EventEmitter<boolean>();
-  @ViewChildren(MenuItemComponent) private menuItemComponent!: QueryList<MenuItemComponent>;
+  @Output() isFiltered = new EventEmitter<boolean>();
+
+  @ViewChildren(MenuItemComponent) private menuItemComponents!: QueryList<MenuItemComponent>;
 
   isOpen = false;
   isActiveChild = false;
+  isItemsFiltered = false;
 
   private onDestroy$ = new Subject();
 
@@ -62,7 +67,49 @@ export class MenuItemNodeComponent implements OnInit, AfterViewInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.openedNodeSubscription();
+    this.activeItemsSubscription();
+    this.filterItemsSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
+  onNodeToggleClick(): void {
+    this.isOpen = !this.isOpen;
+    this.menuItemNodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
+  }
+
+  private activeItemsSubscription(): void {
+    const isChildrenItemsActive = this.menuItemComponents.map((item) => item.isActive$);
+
+    if (isChildrenItemsActive && isChildrenItemsActive.length) {
+      combineLatest(isChildrenItemsActive)
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((itemsActiveState) => {
+          this.isOpen = this.isActiveChild = itemsActiveState.includes(true);
+          this.isActive.emit(this.isOpen);
+        });
+    }
+  }
+
+  private filterItemsSubscription(): void {
+    const isChildrenItemsFiltered = this.menuItemComponents.map((item) => item.isFiltered$);
+
+    if (isChildrenItemsFiltered && isChildrenItemsFiltered.length) {
+      combineLatest(isChildrenItemsFiltered)
+        .pipe(takeUntil(this.onDestroy$))
+        .subscribe((itemsFilteredState) => {
+          this.isItemsFiltered = itemsFilteredState.includes(false) === false;
+          this.isFiltered.emit(this.isItemsFiltered);
+        });
+    }
+  }
+
+  private openedNodeSubscription(): void {
     this.menuItemNodeService.openedNode
       .pipe(
         filter(() => !!this.isOpen),
@@ -75,28 +122,5 @@ export class MenuItemNodeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.changeDetectorRef.markForCheck();
         }
       });
-  }
-
-  ngAfterViewInit(): void {
-    const isChildrenItemsActive = this.menuItemComponent.map((item) => item.isActive$);
-
-    if (isChildrenItemsActive && isChildrenItemsActive.length) {
-      combineLatest(isChildrenItemsActive)
-        .pipe(takeUntil(this.onDestroy$))
-        .subscribe((v) => {
-          this.isOpen = this.isActiveChild = v.includes(true);
-          this.isActive.emit(this.isOpen);
-        });
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
-
-  onNodeToggleClick(): void {
-    this.isOpen = !this.isOpen;
-    this.menuItemNodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
   }
 }

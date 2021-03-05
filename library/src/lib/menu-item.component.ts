@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -6,6 +6,7 @@ import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 import { MenuItemRoleService } from './menu-item-role.service';
 import { MenuItem } from './sidebar-menu.interface';
+import { MenuSearchService } from './menu-search.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -16,7 +17,7 @@ import { MenuItem } from './sidebar-menu.interface';
       *ngIf="{ disabled: (menuItemRoleService.disableItem$(menuItem.roles) | async) === true } as role"
       [ngSwitch]="true"
       class="asm-menu__item"
-      [ngClass]="{ 'asm-menu__item--disabled': role.disabled }"
+      [ngClass]="{ 'asm-menu__item--disabled': role.disabled, 'asm-menu__item--filtered': isItemFiltered }"
     >
       <span *ngSwitchCase="!!menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
       <asm-menu-node
@@ -25,6 +26,7 @@ import { MenuItem } from './sidebar-menu.interface';
         [level]="level"
         [itemDisabled]="itemDisabled || role.disabled"
         (isActive)="onNodeActive($event)"
+        (isFiltered)="onNodeFiltered($event)"
       ></asm-menu-node>
       <asm-menu-anchor
         *ngSwitchDefault
@@ -42,22 +44,23 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
   private onDestroy$ = new Subject();
   private isActive = new BehaviorSubject(false);
+  private isFiltered = new BehaviorSubject(false);
 
   isActive$ = this.isActive.asObservable().pipe(distinctUntilChanged(), takeUntil(this.onDestroy$));
+  isFiltered$ = this.isFiltered.asObservable().pipe(distinctUntilChanged(), takeUntil(this.onDestroy$));
+  isItemFiltered = false;
 
-  constructor(private router: Router, public menuItemRoleService: MenuItemRoleService) {}
+  constructor(
+    private router: Router,
+    public menuItemRoleService: MenuItemRoleService,
+    private menuSearchService: MenuSearchService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.router.events
-      .pipe(
-        filter((e: RouterEvent): e is NavigationEnd => e instanceof NavigationEnd),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe((e) => {
-        this.emitItemActive();
-      });
-
+    this.routerItemActiveSubscription();
     this.emitItemActive();
+    this.menuSearchSubscription();
   }
 
   ngOnDestroy(): void {
@@ -67,6 +70,31 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
   onNodeActive(event: boolean): void {
     this.isActive.next(event);
+  }
+
+  onNodeFiltered(event: boolean): void {
+    this.isFiltered.next(event);
+  }
+
+  private routerItemActiveSubscription(): void {
+    this.router.events
+      .pipe(
+        filter((e: RouterEvent): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntil(this.onDestroy$)
+      )
+      .subscribe((e) => {
+        this.emitItemActive();
+      });
+  }
+
+  private menuSearchSubscription(): void {
+    if (!this.menuItem.children) {
+      this.menuSearchService.search$.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
+        this.isItemFiltered = this.menuSearchService.filter(value, this.menuItem.label || this.menuItem.header);
+        this.isFiltered.next(this.isItemFiltered);
+        this.changeDetectorRef.markForCheck();
+      });
+    }
   }
 
   private emitItemActive(): void {
