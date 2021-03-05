@@ -1,13 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-
-import { MenuHarness } from '../../../testing/src/menu.harness';
-
 import { Menu } from '../sidebar-menu.interface';
 
-import { customMatchers } from './custom.matchers.spec';
-import { sharedTestingModuleFactory, WrapperStubComponent } from './shared.spec';
+import { beforeEachData, beforeEachFactory } from './shared.spec';
 import { menuItemsCount } from './utils.spec';
 
 const menu: Menu = [
@@ -36,22 +29,10 @@ const menu: Menu = [
 ];
 
 describe('first level', () => {
-  let harness: MenuHarness;
-  let router: Router;
-  let fixture: ComponentFixture<WrapperStubComponent>;
+  let { harness, fixture, router } = beforeEachData;
 
   beforeEach(async () => {
-    jasmine.addMatchers(customMatchers);
-
-    await TestBed.configureTestingModule(sharedTestingModuleFactory()).compileComponents();
-
-    fixture = TestBed.createComponent(WrapperStubComponent);
-    const loader = TestbedHarnessEnvironment.loader(fixture);
-    harness = await loader.getHarness(MenuHarness);
-    router = TestBed.inject(Router);
-
-    router.initialNavigation();
-    fixture.detectChanges();
+    ({ harness, fixture, router } = await beforeEachFactory());
   });
 
   it('should not create menu items', async () => {
