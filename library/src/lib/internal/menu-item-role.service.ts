@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { UnAuthorizedVisibility } from './sidebar-menu.interface';
+import { UnAuthorizedVisibility } from '../sidebar-menu.interface';
 
 export type Role = string | number;
 

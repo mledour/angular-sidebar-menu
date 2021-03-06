@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SidebarMenuComponent } from './sidebar-menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { MenuItemNodeComponent } from './menu-item-node.component';
-import { MenuItemAnchorComponent } from './menu-item-anchor.component';
+import { MenuItemComponent } from './internal/menu-item.component';
+import { MenuItemNodeComponent } from './internal/menu-item-node.component';
+import { MenuItemAnchorComponent } from './internal/menu-item-anchor.component';
 
 @NgModule({
   declarations: [SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],

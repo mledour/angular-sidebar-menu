@@ -15,7 +15,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { MenuItemNodeService } from './menu-item-node.service';
-import { MenuItem } from './sidebar-menu.interface';
+import { MenuItem } from '../sidebar-menu.interface';
 import { MenuItemRoleService } from './menu-item-role.service';
 import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
 import { MenuItemComponent } from './menu-item.component';

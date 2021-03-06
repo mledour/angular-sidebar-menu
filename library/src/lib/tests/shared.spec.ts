@@ -3,10 +3,10 @@ import { Route, Router } from '@angular/router';
 
 import { Menu, UnAuthorizedVisibility } from '../sidebar-menu.interface';
 import { SidebarMenuComponent } from '../sidebar-menu.component';
-import { MenuItemComponent } from '../menu-item.component';
-import { MenuItemNodeComponent } from '../menu-item-node.component';
-import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
-import { Role } from '../menu-item-role.service';
+import { MenuItemComponent } from '../internal/menu-item.component';
+import { MenuItemNodeComponent } from '../internal/menu-item-node.component';
+import { MenuItemAnchorComponent } from '../internal/menu-item-anchor.component';
+import { Role } from '../internal/menu-item-role.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';

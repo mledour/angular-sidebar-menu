@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { MenuItem } from './sidebar-menu.interface';
+import { MenuItem } from '../sidebar-menu.interface';
 import { MenuItemAnchorService } from './menu-item-anchor.service';
 
 @Component({

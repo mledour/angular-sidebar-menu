@@ -1,4 +1,4 @@
-import { Role } from './menu-item-role.service';
+import { Role } from './internal/menu-item-role.service';
 
 export type UnAuthorizedVisibility = 'hidden' | 'disabled';
 

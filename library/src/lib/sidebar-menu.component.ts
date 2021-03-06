@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { MenuItemAnchorService } from './menu-item-anchor.service';
-import { MenuItemNodeService } from './menu-item-node.service';
+import { MenuItemAnchorService } from './internal/menu-item-anchor.service';
+import { MenuItemNodeService } from './internal/menu-item-node.service';
 
 import { Menu, UnAuthorizedVisibility } from './sidebar-menu.interface';
-import { MenuItemRoleService, Role } from './menu-item-role.service';
-import { MenuSearchService } from './menu-search.service';
+import { MenuItemRoleService, Role } from './internal/menu-item-role.service';
+import { MenuSearchService } from './internal/menu-search.service';
 
 @Component({
   selector: 'asm-angular-sidebar-menu',

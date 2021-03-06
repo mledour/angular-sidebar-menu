@@ -5,7 +5,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
 import { MenuItemRoleService } from './menu-item-role.service';
-import { MenuItem } from './sidebar-menu.interface';
+import { MenuItem } from '../sidebar-menu.interface';
 import { MenuSearchService } from './menu-search.service';
 
 @Component({
