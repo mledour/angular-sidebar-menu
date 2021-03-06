@@ -19,8 +19,8 @@ import { AnchorService } from './anchor.service';
       <a
         *ngSwitchCase="!!menuItem.route || menuItem.route === ''"
         class="asm-menu__item__anchor"
-        [routerLink]="itemDisabled ? undefined : menuItem.route"
-        [routerLinkActive]="itemDisabled ? '' : 'asm-menu__item__anchor--active'"
+        [routerLink]="disable ? undefined : menuItem.route"
+        [routerLinkActive]="disable ? '' : 'asm-menu__item__anchor--active'"
         [routerLinkActiveOptions]="{ exact: menuItem.linkActiveExact === undefined ? true : menuItem.linkActiveExact }"
       >
         <ng-container *ngTemplateOutlet="innerItem"></ng-container>
@@ -52,7 +52,7 @@ import { AnchorService } from './anchor.service';
 export class AnchorComponent {
   @Input() menuItem!: MenuItem;
   @Input() isActive?: boolean;
-  @Input() itemDisabled?: boolean;
+  @Input() disable = false;
 
   @Output() clickAnchor = new EventEmitter<void>();
 

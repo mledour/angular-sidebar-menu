@@ -39,7 +39,7 @@ import { ItemComponent } from './item.component';
           *ngIf="roleService.showItem$(childItem.roles) | async"
           [menuItem]="childItem"
           [level]="level + 1"
-          [itemDisabled]="itemDisabled"
+          [disable]="disable"
         ></li>
       </ng-container>
     </ul>
@@ -48,7 +48,7 @@ import { ItemComponent } from './item.component';
 export class NodeComponent implements AfterViewInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() level!: number;
-  @Input() itemDisabled?: boolean;
+  @Input() disable = false;
 
   @Output() isActive = new EventEmitter<boolean>();
   @Output() isFiltered = new EventEmitter<boolean>();

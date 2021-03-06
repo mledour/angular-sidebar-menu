@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectorRef,
+  HostBinding,
+} from '@angular/core';
 import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -14,34 +22,33 @@ import { SearchService } from './search.service';
   selector: 'li[asm-menu-item][menuItem]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div
-      *ngIf="{ disabled: (roleService.disableItem$(menuItem.roles) | async) === true } as role"
-      [ngSwitch]="true"
-      class="asm-menu__item"
-      [ngClass]="{ 'asm-menu__item--disabled': role.disabled, 'asm-menu__item--filtered': isItemFiltered }"
-    >
+    <ng-container [ngSwitch]="true">
       <span *ngSwitchCase="!!menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
       <asm-menu-node
         *ngSwitchCase="!!menuItem.children"
         [menuItem]="menuItem"
         [level]="level"
-        [itemDisabled]="itemDisabled || role.disabled"
+        [disable]="disable || isItemDisabled"
         (isActive)="onNodeActive($event)"
         (isFiltered)="onNodeFiltered($event)"
       ></asm-menu-node>
-      <asm-menu-anchor
-        *ngSwitchDefault
-        [menuItem]="menuItem"
-        [itemDisabled]="itemDisabled || !!role.disabled"
-      ></asm-menu-anchor>
-    </div>
+      <asm-menu-anchor *ngSwitchDefault [menuItem]="menuItem" [disable]="disable || isItemDisabled"></asm-menu-anchor>
+    </ng-container>
   `,
 })
 export class ItemComponent implements OnInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() isRootNode = true;
   @Input() level!: number;
-  @Input() itemDisabled?: boolean;
+  @Input() disable = false;
+
+  @HostBinding('class.asm-menu__item') listItemClass = true;
+  @HostBinding('class.asm-menu__item--filtered') get filtered(): boolean {
+    return this.isItemFiltered;
+  }
+  @HostBinding('class.asm-menu__item--disabled') get disabled(): boolean {
+    return this.isItemDisabled || this.disable;
+  }
 
   private onDestroy$ = new Subject();
   private isActive = new BehaviorSubject(false);
@@ -50,6 +57,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   isActive$ = this.isActive.asObservable().pipe(distinctUntilChanged(), takeUntil(this.onDestroy$));
   isFiltered$ = this.isFiltered.asObservable().pipe(distinctUntilChanged(), takeUntil(this.onDestroy$));
   isItemFiltered = false;
+  isItemDisabled = false;
 
   constructor(
     private router: Router,
@@ -62,6 +70,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.routerItemActiveSubscription();
     this.emitItemActive();
     this.menuSearchSubscription();
+    this.disabledItemSubscription();
   }
 
   ngOnDestroy(): void {
@@ -90,12 +99,19 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   private menuSearchSubscription(): void {
     if (!this.menuItem.children) {
-      this.searchService.search$.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
-        this.isItemFiltered = this.searchService.filter(value, this.menuItem.label || this.menuItem.header);
+      this.searchService.search$.pipe(takeUntil(this.onDestroy$)).subscribe((search) => {
+        this.isItemFiltered = this.searchService.filter(search, this.menuItem.label || this.menuItem.header);
         this.isFiltered.next(this.isItemFiltered);
         this.changeDetectorRef.markForCheck();
       });
     }
+  }
+
+  private disabledItemSubscription(): void {
+    this.roleService
+      .disableItem$(this.menuItem.roles)
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((disabled) => (this.isItemDisabled = disabled));
   }
 
   private emitItemActive(): void {

@@ -93,7 +93,7 @@ describe('first level', () => {
     expect(items.length).toEqual(8);
 
     const disabledItems = await harness.getDisabledItems();
-    expect(disabledItems.length).toEqual(3);
+    expect(disabledItems.length).toEqual(4);
   });
 
   it('should switch hidden items on role change', async () => {
