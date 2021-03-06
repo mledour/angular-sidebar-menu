@@ -22,7 +22,6 @@ import { openCloseAnimation, rotateAnimation } from './node.animations';
 import { ItemComponent } from './item.component';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
