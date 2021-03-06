@@ -4,9 +4,10 @@ import { Event as RouterEvent, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 
-import { MenuItemRoleService } from './menu-item-role.service';
 import { MenuItem } from '../sidebar-menu.interface';
-import { MenuSearchService } from './menu-search.service';
+
+import { RoleService } from './role.service';
+import { SearchService } from './search.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -14,7 +15,7 @@ import { MenuSearchService } from './menu-search.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
-      *ngIf="{ disabled: (menuItemRoleService.disableItem$(menuItem.roles) | async) === true } as role"
+      *ngIf="{ disabled: (roleService.disableItem$(menuItem.roles) | async) === true } as role"
       [ngSwitch]="true"
       class="asm-menu__item"
       [ngClass]="{ 'asm-menu__item--disabled': role.disabled, 'asm-menu__item--filtered': isItemFiltered }"
@@ -36,7 +37,7 @@ import { MenuSearchService } from './menu-search.service';
     </div>
   `,
 })
-export class MenuItemComponent implements OnInit, OnDestroy {
+export class ItemComponent implements OnInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() isRootNode = true;
   @Input() level!: number;
@@ -52,8 +53,8 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    public menuItemRoleService: MenuItemRoleService,
-    private menuSearchService: MenuSearchService,
+    public roleService: RoleService,
+    private searchService: SearchService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
@@ -89,8 +90,8 @@ export class MenuItemComponent implements OnInit, OnDestroy {
 
   private menuSearchSubscription(): void {
     if (!this.menuItem.children) {
-      this.menuSearchService.search$.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
-        this.isItemFiltered = this.menuSearchService.filter(value, this.menuItem.label || this.menuItem.header);
+      this.searchService.search$.pipe(takeUntil(this.onDestroy$)).subscribe((value) => {
+        this.isItemFiltered = this.searchService.filter(value, this.menuItem.label || this.menuItem.header);
         this.isFiltered.next(this.isItemFiltered);
         this.changeDetectorRef.markForCheck();
       });

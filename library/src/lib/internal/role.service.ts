@@ -8,7 +8,7 @@ import { UnAuthorizedVisibility } from '../sidebar-menu.interface';
 export type Role = string | number;
 
 @Injectable()
-export class MenuItemRoleService {
+export class RoleService {
   private role$ = new BehaviorSubject<Role | undefined>(undefined);
   private unAuthorizedVisibility$ = new BehaviorSubject<UnAuthorizedVisibility>('hidden');
 

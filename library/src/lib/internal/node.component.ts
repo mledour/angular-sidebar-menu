@@ -14,11 +14,12 @@ import {
 import { combineLatest, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { MenuItemNodeService } from './menu-item-node.service';
 import { MenuItem } from '../sidebar-menu.interface';
-import { MenuItemRoleService } from './menu-item-role.service';
-import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
-import { MenuItemComponent } from './menu-item.component';
+
+import { NodeService } from './node.service';
+import { RoleService } from './role.service';
+import { openCloseAnimation, rotateAnimation } from './node.animations';
+import { ItemComponent } from './item.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -30,13 +31,13 @@ import { MenuItemComponent } from './menu-item.component';
     [ngClass]="{ 'asm-menu__item__node--open': isOpen, 'asm-menu__item__node--filtered': isItemsFiltered }"
   >
     <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
-      <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
+      <i toggleIcon [@rotate]="isOpen" [class]="nodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
       <ng-container *ngFor="let childItem of menuItem.children">
         <li
           asm-menu-item
-          *ngIf="menuItemRoleService.showItem$(childItem.roles) | async"
+          *ngIf="roleService.showItem$(childItem.roles) | async"
           [menuItem]="childItem"
           [level]="level + 1"
           [itemDisabled]="itemDisabled"
@@ -45,7 +46,7 @@ import { MenuItemComponent } from './menu-item.component';
     </ul>
   </div>`,
 })
-export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
+export class NodeComponent implements AfterViewInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() level!: number;
   @Input() itemDisabled?: boolean;
@@ -53,7 +54,7 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
   @Output() isActive = new EventEmitter<boolean>();
   @Output() isFiltered = new EventEmitter<boolean>();
 
-  @ViewChildren(MenuItemComponent) private menuItemComponents!: QueryList<MenuItemComponent>;
+  @ViewChildren(ItemComponent) private menuItemComponents!: QueryList<ItemComponent>;
 
   isOpen = false;
   isActiveChild = false;
@@ -62,8 +63,8 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
   private onDestroy$ = new Subject();
 
   constructor(
-    public menuItemNodeService: MenuItemNodeService,
-    public menuItemRoleService: MenuItemRoleService,
+    public nodeService: NodeService,
+    public roleService: RoleService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
@@ -80,7 +81,7 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
 
   onNodeToggleClick(): void {
     this.isOpen = !this.isOpen;
-    this.menuItemNodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
+    this.nodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
   }
 
   private activeItemsSubscription(): void {
@@ -110,7 +111,7 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
   }
 
   private openedNodeSubscription(): void {
-    this.menuItemNodeService.openedNode
+    this.nodeService.openedNode
       .pipe(
         filter(() => !!this.isOpen),
         filter((node) => node.nodeComponent !== this),

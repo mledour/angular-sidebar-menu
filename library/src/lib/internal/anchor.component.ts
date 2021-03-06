@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { MenuItem } from '../sidebar-menu.interface';
-import { MenuItemAnchorService } from './menu-item-anchor.service';
+
+import { AnchorService } from './anchor.service';
 
 @Component({
   selector: 'asm-menu-anchor',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<ng-container [ngSwitch]="true">
+  template: ` <ng-container [ngSwitch]="true">
       <a
         *ngSwitchCase="!!menuItem.children"
         class="asm-menu__item__anchor"
@@ -31,8 +32,8 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
 
     <ng-template #innerItem>
       <i
-        *ngIf="menuItem.iconClasses || menuItemAnchorService.iconClasses"
-        [class]="menuItem.iconClasses || menuItemAnchorService.iconClasses"
+        *ngIf="menuItem.iconClasses || anchorService.iconClasses"
+        [class]="menuItem.iconClasses || anchorService.iconClasses"
         class="asm-menu__item__icon"
       ></i>
       <span class="asm-menu__item__label">{{ menuItem.label }}</span>
@@ -48,12 +49,12 @@ import { MenuItemAnchorService } from './menu-item-anchor.service';
       </span>
     </ng-template>`,
 })
-export class MenuItemAnchorComponent {
+export class AnchorComponent {
   @Input() menuItem!: MenuItem;
   @Input() isActive?: boolean;
   @Input() itemDisabled?: boolean;
 
   @Output() clickAnchor = new EventEmitter<void>();
 
-  constructor(public menuItemAnchorService: MenuItemAnchorService) {}
+  constructor(public anchorService: AnchorService) {}
 }
