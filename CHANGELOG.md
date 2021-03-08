@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.3.0...v1.4.0) (2021-03-08)
+
+
+### Features
+
+* trackBy menu item to keep node toggle state and improve performance ([a5a4088](https://github.com/mledour/angular-sidebar-menu/commit/a5a4088c3c2342f88b4eafee7afbf364d466a3ec))
+
 # [1.3.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.2.2...v1.3.0) (2021-03-05)
 
 
