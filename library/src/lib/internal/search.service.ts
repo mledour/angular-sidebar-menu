@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
-export class MenuSearchService {
-  // tslint:disable-next-line:variable-name
+export class SearchService {
   private _search = new Subject<string>();
   public search$ = this._search.asObservable();
 

@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SidebarMenuComponent } from './sidebar-menu.component';
-import { MenuItemComponent } from './menu-item.component';
-import { MenuItemNodeComponent } from './menu-item-node.component';
-import { MenuItemAnchorComponent } from './menu-item-anchor.component';
+
+import { ItemComponent } from './internal/item.component';
+import { NodeComponent } from './internal/node.component';
+import { AnchorComponent } from './internal/anchor.component';
 
 @NgModule({
-  declarations: [SidebarMenuComponent, MenuItemComponent, MenuItemNodeComponent, MenuItemAnchorComponent],
+  declarations: [SidebarMenuComponent, ItemComponent, NodeComponent, AnchorComponent],
   imports: [RouterModule, CommonModule],
   exports: [SidebarMenuComponent],
 })

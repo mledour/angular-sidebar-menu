@@ -11,7 +11,6 @@ class MenuItemHarness extends ComponentHarness {
   getLabelElement = this.locatorFor('.asm-menu__item__label, .asm-menu__item__header');
   getAnchorElement = this.locatorFor('.asm-menu__item__anchor');
   getBadgesElement = this.locatorForAll('.asm-badges__badge');
-  getWrapper = this.locatorFor('.asm-menu__item');
 
   static with(options: MenuItemHarnessFilters): HarnessPredicate<MenuItemHarness> {
     return new HarnessPredicate(MenuItemHarness, options).addOption('label', options.label, (harness, label) =>
@@ -25,7 +24,7 @@ class MenuItemHarness extends ComponentHarness {
   }
 
   async isFiltered(): Promise<boolean> {
-    const el = await this.getWrapper();
+    const el = await this.host();
     return el.hasClass('asm-menu__item--filtered');
   }
 }

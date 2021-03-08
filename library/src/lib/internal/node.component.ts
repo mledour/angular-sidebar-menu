@@ -14,14 +14,15 @@ import {
 import { combineLatest, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { MenuItemNodeService } from './menu-item-node.service';
-import { MenuItem } from './sidebar-menu.interface';
-import { MenuItemRoleService } from './menu-item-role.service';
-import { openCloseAnimation, rotateAnimation } from './menu-item.animations';
-import { MenuItemComponent } from './menu-item.component';
+import { MenuItem } from '../sidebar-menu.interface';
+
+import { NodeService } from './node.service';
+import { RoleService } from './role.service';
+import { openCloseAnimation, rotateAnimation } from './node.animations';
+import { ItemComponent } from './item.component';
+import { trackByItem } from './utils';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,40 +31,41 @@ import { MenuItemComponent } from './menu-item.component';
     [ngClass]="{ 'asm-menu__item__node--open': isOpen, 'asm-menu__item__node--filtered': isItemsFiltered }"
   >
     <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
-      <i toggleIcon [@rotate]="isOpen" [class]="menuItemNodeService.toggleIconClasses"></i>
+      <i toggleIcon [@rotate]="isOpen" [class]="nodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
-      <ng-container *ngFor="let childItem of menuItem.children">
+      <ng-container *ngFor="let childItem of menuItem.children; trackBy: trackByItem">
         <li
           asm-menu-item
-          *ngIf="menuItemRoleService.showItem$(childItem.roles) | async"
+          *ngIf="roleService.showItem$(childItem.roles) | async"
           [menuItem]="childItem"
           [level]="level + 1"
-          [itemDisabled]="itemDisabled"
+          [disable]="disable"
         ></li>
       </ng-container>
     </ul>
   </div>`,
 })
-export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
+export class NodeComponent implements AfterViewInit, OnDestroy {
   @Input() menuItem!: MenuItem;
   @Input() level!: number;
-  @Input() itemDisabled?: boolean;
+  @Input() disable = false;
 
   @Output() isActive = new EventEmitter<boolean>();
   @Output() isFiltered = new EventEmitter<boolean>();
 
-  @ViewChildren(MenuItemComponent) private menuItemComponents!: QueryList<MenuItemComponent>;
+  @ViewChildren(ItemComponent) private menuItemComponents!: QueryList<ItemComponent>;
 
   isOpen = false;
   isActiveChild = false;
   isItemsFiltered = false;
+  trackByItem = trackByItem;
 
   private onDestroy$ = new Subject();
 
   constructor(
-    public menuItemNodeService: MenuItemNodeService,
-    public menuItemRoleService: MenuItemRoleService,
+    public nodeService: NodeService,
+    public roleService: RoleService,
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
@@ -80,7 +82,7 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
 
   onNodeToggleClick(): void {
     this.isOpen = !this.isOpen;
-    this.menuItemNodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
+    this.nodeService.openedNode.next({ nodeComponent: this, nodeLevel: this.level });
   }
 
   private activeItemsSubscription(): void {
@@ -110,7 +112,7 @@ export class MenuItemNodeComponent implements AfterViewInit, OnDestroy {
   }
 
   private openedNodeSubscription(): void {
-    this.menuItemNodeService.openedNode
+    this.nodeService.openedNode
       .pipe(
         filter(() => !!this.isOpen),
         filter((node) => node.nodeComponent !== this),

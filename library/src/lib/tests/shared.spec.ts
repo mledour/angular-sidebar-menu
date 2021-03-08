@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
-
-import { Menu, UnAuthorizedVisibility } from '../sidebar-menu.interface';
-import { SidebarMenuComponent } from '../sidebar-menu.component';
-import { MenuItemComponent } from '../menu-item.component';
-import { MenuItemNodeComponent } from '../menu-item-node.component';
-import { MenuItemAnchorComponent } from '../menu-item-anchor.component';
-import { Role } from '../menu-item-role.service';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, TestModuleMetadata } from '@angular/core/testing';
 
+import { Menu, UnAuthorizedVisibility } from '../sidebar-menu.interface';
+import { SidebarMenuComponent } from '../sidebar-menu.component';
+
+import { ItemComponent } from '../internal/item.component';
+import { NodeComponent } from '../internal/node.component';
+import { AnchorComponent } from '../internal/anchor.component';
+import { Role } from '../internal/role.service';
+
 import { customMatchers } from './custom.matchers.spec';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MenuHarness } from '../../../testing/src/menu.harness';
-import { HarnessLoader } from '@angular/cdk/testing';
 
 @Component({})
 class RoutedStubComponent {}
@@ -38,13 +39,7 @@ export class WrapperStubComponent {
 }
 
 export const sharedTestingModuleFactory = (): TestModuleMetadata => ({
-  declarations: [
-    WrapperStubComponent,
-    SidebarMenuComponent,
-    MenuItemComponent,
-    MenuItemNodeComponent,
-    MenuItemAnchorComponent,
-  ],
+  declarations: [WrapperStubComponent, SidebarMenuComponent, ItemComponent, NodeComponent, AnchorComponent],
   imports: [RouterTestingModule.withRoutes(routes), NoopAnimationsModule],
 });
 

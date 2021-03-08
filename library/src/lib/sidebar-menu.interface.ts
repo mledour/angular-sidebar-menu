@@ -1,6 +1,8 @@
-import { Role } from './menu-item-role.service';
+import { Role } from './internal/role.service';
 
 export type UnAuthorizedVisibility = 'hidden' | 'disabled';
+
+type MenuItemID = number | string;
 
 export interface MenuItemBadge {
   label: string;
@@ -8,6 +10,7 @@ export interface MenuItemBadge {
 }
 
 export interface MenuItemBase {
+  id?: MenuItemID;
   label: string;
   iconClasses?: string;
   badges?: MenuItemBadge[];
@@ -25,6 +28,7 @@ export interface MenuItemLeafURL extends MenuItemBase {
 }
 
 export interface MenuItemHeader {
+  id?: MenuItemID;
   header: string;
 }
 
