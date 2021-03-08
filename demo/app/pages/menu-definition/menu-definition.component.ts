@@ -8,25 +8,22 @@ import { Component } from '@angular/core';
 export class MenuDefinitionComponent {
   readonly menuType = 'Menu: (MenuItemLeafRoute | MenuItemLeafURL | MenuItemHeader | MenuItemNode)[]';
 
-  readonly menuItemLeafRouteType = `label: string;
-iconClasses?: string;
-badges?: MenuItemBadge[];
-roles: Role[];
-route: string;
+  readonly menuBase = `id: number | string // needed to keep node toggle state and improve performance)
+label: string
+iconClasses: string | undefined
+badges: MenuItemBadge[] | undefined
+roles: Role[]`;
+
+  readonly menuItemLeafRouteType = `extends MenuItemBase
+route: string
 linkActiveExact: boolean = true`;
 
-  readonly menuItemLeafURLType = `label: string;
-iconClasses?: string;
-badges?: MenuItemBadge[];
-roles: Role[];
-url: string;
-target?: string;`;
+  readonly menuItemLeafURLType = `extends MenuItemBase
+url: string
+target: string  | undefined`;
 
-  readonly menuItemLeafNodeType = `label: string;
-iconClasses?: string;
-badges?: MenuItemBadge[];
-roles: Role[];
-children: MenuItem[];`;
+  readonly menuItemLeafNodeType = `extends MenuItemBase
+children: MenuItem[]`;
 
   readonly menuConfExample = `const menu = [
   {

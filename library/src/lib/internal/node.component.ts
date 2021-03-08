@@ -20,6 +20,7 @@ import { NodeService } from './node.service';
 import { RoleService } from './role.service';
 import { openCloseAnimation, rotateAnimation } from './node.animations';
 import { ItemComponent } from './item.component';
+import { trackByItem } from './utils';
 
 @Component({
   selector: 'asm-menu-node',
@@ -33,7 +34,7 @@ import { ItemComponent } from './item.component';
       <i toggleIcon [@rotate]="isOpen" [class]="nodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
-      <ng-container *ngFor="let childItem of menuItem.children">
+      <ng-container *ngFor="let childItem of menuItem.children; trackBy: trackByItem">
         <li
           asm-menu-item
           *ngIf="roleService.showItem$(childItem.roles) | async"
@@ -58,6 +59,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
   isOpen = false;
   isActiveChild = false;
   isItemsFiltered = false;
+  trackByItem = trackByItem;
 
   private onDestroy$ = new Subject();
 

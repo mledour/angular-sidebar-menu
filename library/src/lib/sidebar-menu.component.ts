@@ -6,6 +6,7 @@ import { AnchorService } from './internal/anchor.service';
 import { NodeService } from './internal/node.service';
 import { RoleService, Role } from './internal/role.service';
 import { SearchService } from './internal/search.service';
+import { trackByItem } from './internal/utils';
 
 @Component({
   selector: 'asm-angular-sidebar-menu',
@@ -13,7 +14,7 @@ import { SearchService } from './internal/search.service';
   providers: [NodeService, AnchorService, RoleService, SearchService],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <ul class="asm-menu" [@.disabled]="disableAnimations">
-    <ng-container *ngFor="let item of menu">
+    <ng-container *ngFor="let item of menu; trackBy: trackByItem">
       <li asm-menu-item *ngIf="roleService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
     </ng-container>
   </ul>`,
@@ -45,6 +46,7 @@ export class SidebarMenuComponent {
 
   menu?: Menu;
   disableAnimations = true;
+  trackByItem = trackByItem;
 
   constructor(
     private anchorService: AnchorService,
