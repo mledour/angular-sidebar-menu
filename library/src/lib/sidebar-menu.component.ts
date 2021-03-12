@@ -13,9 +13,15 @@ import { trackByItem } from './internal/utils';
   styleUrls: ['sidebar-menu.component.scss'],
   providers: [NodeService, AnchorService, RoleService, SearchService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <ul class="asm-menu" [@.disabled]="disableAnimations">
+  template: ` <ul class="asm-menu" [ngClass]="{ 'asm-menu--mini': mini }" [@.disabled]="disableAnimations">
     <ng-container *ngFor="let item of menu; trackBy: trackByItem">
-      <li asm-menu-item *ngIf="roleService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
+      <li
+        asm-menu-item
+        class="asm-menu-item asm-menu-item--root"
+        *ngIf="roleService.showItem$(item.roles) | async"
+        [menuItem]="item"
+        [level]="0"
+      ></li>
     </ng-container>
   </ul>`,
 })
@@ -43,6 +49,7 @@ export class SidebarMenuComponent {
   @Input() set search(value: string | undefined) {
     this.searchService.search = value;
   }
+  @Input() mini = false;
 
   menu?: Menu;
   disableAnimations = true;

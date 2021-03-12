@@ -1,6 +1,9 @@
-<mat-sidenav-container class="app-sidenav-container">
-  <mat-sidenav class="app-sidenav" mode="side" opened
-    ><div class="input-search" [ngClass]="{ 'input-search--focus': inputSearchFocus }">
+<mat-sidenav-container class="app-sidenav-container" autosize>
+  <mat-sidenav class="app-sidenav" mode="side" opened #matSidenav
+    ><div
+      class="input-search"
+      [ngClass]="{ 'input-search--focus': inputSearchFocus, 'd-none': currentSidebarMode === sidebarModes.MINI }"
+    >
       <input
         matInput
         placeholder="Search..."
@@ -14,6 +17,7 @@
     <asm-angular-sidebar-menu
       *ngIf="menuConfService.menu$ | async as menu"
       [menu]="menu"
+      [mini]="currentSidebarMode === sidebarModes.MINI"
       [unAuthorizedVisibility]="visibility.value"
       [role]="currentRole"
       [search]="currentSearch"
@@ -23,6 +27,15 @@
   ></mat-sidenav>
   <mat-sidenav-content class="app-sidenav-content">
     <header>
+      <i class="sidebar-toggle fa fa-bars" (click)="matSidenav.toggle()"></i>
+      <mat-form-field appearance="fill">
+        <i matSuffix class="fa fa-chevron-down"></i>
+        <mat-label>Sidebar Mode</mat-label>
+        <mat-select [(value)]="currentSidebarMode">
+          <mat-option [value]="sidebarModes.NORMAL">Normal</mat-option>
+          <mat-option [value]="sidebarModes.MINI">Mini</mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-form-field appearance="fill">
         <i matSuffix class="fa fa-chevron-down"></i>
         <mat-label>Role</mat-label>

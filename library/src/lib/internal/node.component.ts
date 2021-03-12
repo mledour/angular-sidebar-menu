@@ -27,13 +27,22 @@ import { trackByItem } from './utils';
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
+  template: ` <asm-menu-anchor
+      class="asm-menu-anchor"
+      [menuItem]="menuItem"
+      (clickAnchor)="onNodeToggleClick()"
+      [isActive]="isActiveChild"
+    >
       <i toggleIcon [@rotate]="isOpen" [class]="nodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
+      <li *ngIf="level === 0" class="asm-menu-item">
+        <span class="asm-menu-node__label">{{ menuItem.label }}</span>
+      </li>
       <ng-container *ngFor="let childItem of menuItem.children; trackBy: trackByItem">
         <li
           asm-menu-item
+          class="asm-menu-item"
           *ngIf="roleService.showItem$(childItem.roles) | async"
           [menuItem]="childItem"
           [level]="level + 1"

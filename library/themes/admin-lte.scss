@@ -1,4 +1,4 @@
-asm-menu-anchor {
+.asm-menu-anchor {
   display: block;
   border-left: 3px solid transparent;
 
@@ -17,11 +17,11 @@ asm-menu-anchor {
   }
 }
 
-asm-menu-node ul asm-menu-anchor {
+.asm-menu-node ul .asm-menu-anchor {
   border-left: none;
 
   a {
-    padding: 5px 5px 5px 15px;
+    padding: 5px 15px;
     color: #8aa4af;
     background: none;
   }
@@ -36,24 +36,24 @@ asm-menu-node ul asm-menu-anchor {
 .asm-menu-item--disabled {
   opacity: 0.5;
 
-  asm-menu-anchor a[href]:hover,
-  asm-menu-anchor a[routerLink]:hover {
+  .asm-menu-anchor a[href]:hover,
+  .asm-menu-anchor a[routerLink]:hover {
     cursor: not-allowed;
   }
-  asm-menu-anchor a:hover {
+  .asm-menu-anchor a:hover {
     background: inherit;
     color: #b8c7ce;
   }
-  asm-menu-node ul asm-menu-anchor a {
+  .asm-menu-node .asm-menu-node .asm-menu-anchor a {
     color: #8aa4af !important;
   }
 }
 
-asm-menu-node ul {
+.asm-menu-node ul {
   background: #2c3b41;
   padding-left: 5px !important;
 
-  asm-menu-node ul {
+  .asm-menu-node ul {
     padding-left: 20px !important;
   }
 }
@@ -90,5 +90,27 @@ asm-menu-node ul {
   }
   &.badge--blue {
     background-color: #3c8dbc;
+  }
+}
+
+.asm-menu--mini {
+  .asm-menu-node__label,
+  > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label {
+    font-weight: 400;
+  }
+
+  > .asm-menu-item:hover > .asm-menu-node > ul,
+  > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
+    border-radius: 0 4px 4px 0;
+  }
+
+  .asm-menu-node__label,
+  > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
+    line-height: 14px;
+    padding: 12px 15px;
+    color: #b8c7ce;
+    display: block;
+    background: #1e282c;
+    margin-left: -5px;
   }
 }

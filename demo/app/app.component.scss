@@ -8,7 +8,6 @@
 
   .app-sidenav {
     background: #222d32;
-    width: 230px;
 
     .input-search {
       display: flex;
@@ -37,8 +36,24 @@
     }
   }
 
+  mat-sidenav:hover,
+  mat-sidenav:hover ::ng-deep .mat-drawer-inner-container {
+    overflow: visible;
+  }
+
   .app-sidenav-content > header {
+    display: flex;
     border-bottom: 1px solid #dfdfdf;
+
+    .sidebar-toggle {
+      width: 50px;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #dfdfdf;
+      cursor: pointer;
+    }
 
     ::ng-deep .mat-form-field-wrapper {
       padding: 0;

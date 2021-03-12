@@ -26,13 +26,19 @@ import { SearchService } from './search.service';
       <span *ngSwitchCase="!!menuItem.header" class="asm-menu-item__header">{{ menuItem.header }}</span>
       <asm-menu-node
         *ngSwitchCase="!!menuItem.children"
+        class="asm-menu-node"
         [menuItem]="menuItem"
         [level]="level"
         [disable]="disable || isItemDisabled"
         (isActive)="onNodeActive($event)"
         (isFiltered)="onNodeFiltered($event)"
       ></asm-menu-node>
-      <asm-menu-anchor *ngSwitchDefault [menuItem]="menuItem" [disable]="disable || isItemDisabled"></asm-menu-anchor>
+      <asm-menu-anchor
+        class="asm-menu-anchor"
+        *ngSwitchDefault
+        [menuItem]="menuItem"
+        [disable]="disable || isItemDisabled"
+      ></asm-menu-anchor>
     </ng-container>
   `,
 })
