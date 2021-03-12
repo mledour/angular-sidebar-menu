@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnDestroy,
   Output,
@@ -26,11 +27,7 @@ import { trackByItem } from './utils';
   selector: 'asm-menu-node',
   animations: [openCloseAnimation, rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <div
-    class="asm-menu__item__node"
-    [ngClass]="{ 'asm-menu__item__node--open': isOpen, 'asm-menu__item__node--filtered': isItemsFiltered }"
-  >
-    <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
+  template: ` <asm-menu-anchor [menuItem]="menuItem" (clickAnchor)="onNodeToggleClick()" [isActive]="isActiveChild">
       <i toggleIcon [@rotate]="isOpen" [class]="nodeService.toggleIconClasses"></i>
     </asm-menu-anchor>
     <ul [@openClose]="isOpen">
@@ -43,8 +40,7 @@ import { trackByItem } from './utils';
           [disable]="disable"
         ></li>
       </ng-container>
-    </ul>
-  </div>`,
+    </ul>`,
 })
 export class NodeComponent implements AfterViewInit, OnDestroy {
   @Input() menuItem!: MenuItem;
@@ -53,6 +49,14 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
 
   @Output() isActive = new EventEmitter<boolean>();
   @Output() isFiltered = new EventEmitter<boolean>();
+
+  @HostBinding('class.asm-menu-node--filtered') get filtered(): boolean {
+    return this.isItemsFiltered;
+  }
+
+  @HostBinding('class.asm-menu-node--open') get open(): boolean {
+    return this.isOpen;
+  }
 
   @ViewChildren(ItemComponent) private menuItemComponents!: QueryList<ItemComponent>;
 

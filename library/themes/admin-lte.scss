@@ -1,65 +1,71 @@
-.asm-menu__item__anchor {
-  font-size: 14px;
-  line-height: 20px;
-  padding: 12px 5px 12px 15px;
-  color: #b8c7ce;
+asm-menu-anchor {
+  display: block;
   border-left: 3px solid transparent;
+
+  &.asm-menu-anchor--active {
+    border-left-color: #3c8dbc !important;
+  }
+  a {
+    color: #b8c7ce;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 12px 5px 12px 15px;
+
+    &:hover {
+      background: #1e282c;
+    }
+  }
 }
 
-.asm-menu__item__anchor--active {
-  border-left-color: #3c8dbc !important;
-}
-
-.asm-menu__item__anchor:hover {
-  background: #1e282c;
-}
-
-.asm-menu__item__node ul .asm-menu__item__anchor {
-  padding: 5px 5px 5px 15px;
-  color: #8aa4af;
+asm-menu-node ul asm-menu-anchor {
   border-left: none;
-  background: none;
 
-  &:hover,
-  &.asm-menu__item__anchor--active {
+  a {
+    padding: 5px 5px 5px 15px;
+    color: #8aa4af;
+    background: none;
+  }
+
+  &:hover a,
+  &.asm-menu-anchor--active a {
     background: none;
     color: #fff !important;
   }
 }
 
-.asm-menu__item--disabled {
+.asm-menu-item--disabled {
   opacity: 0.5;
 
-  .asm-menu__item__anchor[href]:hover,
-  .asm-menu__item__anchor[routerLink]:hover {
+  asm-menu-anchor a[href]:hover,
+  asm-menu-anchor a[routerLink]:hover {
     cursor: not-allowed;
   }
-  .asm-menu__item__anchor:hover {
+  asm-menu-anchor a:hover {
     background: inherit;
     color: #b8c7ce;
   }
-  .asm-menu__item__node ul .asm-menu__item__anchor {
+  asm-menu-node ul asm-menu-anchor a {
     color: #8aa4af !important;
   }
 }
 
-.asm-menu__item__node ul {
+asm-menu-node ul {
   background: #2c3b41;
   padding-left: 5px !important;
 
-  .asm-menu__item__node ul {
+  asm-menu-node ul {
     padding-left: 20px !important;
   }
 }
 
-.asm-menu__item__header {
+.asm-menu-item__header {
   padding: 10px 25px 10px 15px !important;
   color: #4b646f;
   background: #1a2226;
   font-size: 12px;
   text-transform: uppercase;
 
-  .asm-menu__item__header {
+  .asm-menu-item__header {
     margin-left: -5px;
     padding: 6px 12px 6px 20px !important;
   }

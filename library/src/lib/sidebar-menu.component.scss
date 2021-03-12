@@ -1,28 +1,27 @@
 :host ::ng-deep {
   .asm-menu,
-  .asm-menu__item,
-  .asm-menu__item__node ul,
-  .asm-menu__item__node li {
+  ul,
+  li {
     margin: 0;
     padding: 0;
   }
 
-  .asm-menu__item__node:not(.asm-menu__item__node--open) > .ng-trigger-openClose,
-  .asm-menu__item__node > .ng-trigger-openClose.ng-animating {
+  asm-menu-node:not(.asm-menu-node--open) > .ng-trigger-openClose,
+  asm-menu-node > .ng-trigger-openClose.ng-animating {
     overflow: hidden;
   }
 
-  .asm-menu__item--filtered,
-  .asm-menu__item__node--filtered {
+  .asm-menu-item--filtered,
+  .asm-menu-node--filtered {
     display: none;
   }
 
   .asm-menu,
-  .asm-menu__item__node ul {
+  asm-menu-node ul {
     list-style: none;
   }
 
-  .asm-menu__item__anchor {
+  asm-menu-anchor a {
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -31,23 +30,23 @@
     user-select: none;
   }
 
-  .asm-menu__item__header {
+  .asm-menu-item__header {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
   }
 
-  .asm-menu__item .asm-menu__item__header {
+  asm-menu-node .asm-menu-item__header {
     margin-left: -6px;
   }
 
-  .asm-menu__item__icon {
+  .asm-menu-anchor__icon {
     width: 20px;
   }
 
-  .asm-menu__item__pull.asm-toggle,
-  .asm-menu__item__pull.asm-badges {
+  .asm-menu-anchor__pull.asm-toggle,
+  .asm-menu-anchor__pull.asm-badges {
     position: absolute;
     right: 10px;
 

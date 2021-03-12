@@ -63,7 +63,7 @@ describe('first level', () => {
   it('should navigate to item route on menu item click', async () => {
     const itemConf = menu[2] as MenuItemLeafRoute;
     const item = await harness.getItemsWith({ label: itemConf.label });
-    const link = await item[0].getAnchorElement();
+    const link = await item[0].getLinkElement();
 
     await link.click();
 

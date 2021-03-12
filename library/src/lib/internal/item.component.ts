@@ -23,7 +23,7 @@ import { SearchService } from './search.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container [ngSwitch]="true">
-      <span *ngSwitchCase="!!menuItem.header" class="asm-menu__item__header">{{ menuItem.header }}</span>
+      <span *ngSwitchCase="!!menuItem.header" class="asm-menu-item__header">{{ menuItem.header }}</span>
       <asm-menu-node
         *ngSwitchCase="!!menuItem.children"
         [menuItem]="menuItem"
@@ -42,11 +42,10 @@ export class ItemComponent implements OnInit, OnDestroy {
   @Input() level!: number;
   @Input() disable = false;
 
-  @HostBinding('class.asm-menu__item') listItemClass = true;
-  @HostBinding('class.asm-menu__item--filtered') get filtered(): boolean {
+  @HostBinding('class.asm-menu-item--filtered') get filtered(): boolean {
     return this.isItemFiltered;
   }
-  @HostBinding('class.asm-menu__item--disabled') get disabled(): boolean {
+  @HostBinding('class.asm-menu-item--disabled') get disabled(): boolean {
     return this.isItemDisabled || this.disable;
   }
 

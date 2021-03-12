@@ -8,8 +8,8 @@ interface MenuItemHarnessFilters extends BaseHarnessFilters {
 class MenuItemHarness extends ComponentHarness {
   static hostSelector = '[asm-menu-item]';
 
-  getLabelElement = this.locatorFor('.asm-menu__item__label, .asm-menu__item__header');
-  getAnchorElement = this.locatorFor('.asm-menu__item__anchor');
+  getLabelElement = this.locatorFor('.asm-menu-anchor__label, .asm-menu-item__header');
+  getLinkElement = this.locatorFor('asm-menu-anchor a');
   getBadgesElement = this.locatorForAll('.asm-badges__badge');
 
   static with(options: MenuItemHarnessFilters): HarnessPredicate<MenuItemHarness> {
@@ -25,7 +25,7 @@ class MenuItemHarness extends ComponentHarness {
 
   async isFiltered(): Promise<boolean> {
     const el = await this.host();
-    return el.hasClass('asm-menu__item--filtered');
+    return el.hasClass('asm-menu-item--filtered');
   }
 }
 
@@ -33,16 +33,16 @@ export class MenuHarness extends ComponentHarness {
   static hostSelector = 'asm-angular-sidebar-menu';
 
   getItems = this.locatorForAll(MenuItemHarness);
-  getItemsHeaders = this.locatorForAll('.asm-menu__item__header');
-  getItemsWithIcons = this.locatorForAll('.asm-menu__item__icon');
+  getItemsHeaders = this.locatorForAll('.asm-menu-item__header');
+  getItemsWithIcons = this.locatorForAll('.asm-menu-anchor__icon');
   getItemsWithBadges = this.locatorForAll('.asm-badges');
-  getActivatedAnchors = this.locatorForAll('.asm-menu__item__anchor--active');
-  getActivatedAnchorsLabels = this.locatorForAll('.asm-menu__item__anchor--active .asm-menu__item__label');
-  getOpenedNodes = this.locatorForAll('.asm-menu__item__node--open');
-  getOpenedNodesLabels = this.locatorForAll('.asm-menu__item__node--open > asm-menu-anchor .asm-menu__item__label');
-  getDisabledItems = this.locatorForAll('.asm-menu__item--disabled');
-  getFilteredItems = this.locatorForAll('.asm-menu__item--filtered');
-  getFilteredNodes = this.locatorForAll('.asm-menu__item__node--filtered');
+  getActivatedAnchors = this.locatorForAll('.asm-menu-anchor--active');
+  getActivatedAnchorsLabels = this.locatorForAll('.asm-menu-anchor--active .asm-menu-anchor__label');
+  getOpenedNodes = this.locatorForAll('.asm-menu-node--open');
+  getOpenedNodesLabels = this.locatorForAll('.asm-menu-node--open > asm-menu-anchor .asm-menu-anchor__label');
+  getDisabledItems = this.locatorForAll('.asm-menu-item--disabled');
+  getFilteredItems = this.locatorForAll('.asm-menu-item--filtered');
+  getFilteredNodes = this.locatorForAll('.asm-menu-node--filtered');
 
   async getItemsWith(filters: MenuItemHarnessFilters = {}): Promise<MenuItemHarness[]> {
     const getFilteredItems = this.locatorForAll(MenuItemHarness.with(filters));
@@ -56,6 +56,6 @@ export class MenuHarness extends ComponentHarness {
 
   async clickItemWith(filters: MenuItemHarnessFilters = {}): Promise<void> {
     const item = await this.getItemWith(filters);
-    return (await item.getAnchorElement()).click();
+    return (await item.getLinkElement()).click();
   }
 }
