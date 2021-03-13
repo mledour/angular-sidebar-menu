@@ -82,25 +82,21 @@ describe('filter', () => {
 
   it('should not filter items', async () => {
     expect((await harness.getFilteredItems()).length).toEqual(0);
-    expect((await harness.getFilteredNodes()).length).toEqual(0);
 
     fixture.componentInstance.search = '';
 
     expect((await harness.getFilteredItems()).length).toEqual(0);
-    expect((await harness.getFilteredNodes()).length).toEqual(0);
   });
 
   it('should filter items', async () => {
     fixture.componentInstance.search = 'node 1';
-    expect((await harness.getFilteredItems()).length).toEqual(8);
-    expect((await harness.getFilteredNodes()).length).toEqual(4);
+    expect((await harness.getFilteredItems()).length).toEqual(12);
   });
 
   it('should not filter item node parents', async () => {
     fixture.componentInstance.search = 'node 2 children 41';
 
-    expect((await harness.getFilteredItems()).length).toEqual(9);
-    expect((await harness.getFilteredNodes()).length).toEqual(3);
+    expect((await harness.getFilteredItems()).length).toEqual(12);
     expect(await (await harness.getItemWith({ label: 'node 2 children 41' })).isFiltered()).toBeFalsy();
     expect(await (await harness.getItemWith({ label: 'node 1 children 4' })).isFiltered()).toBeFalsy();
     expect(await (await harness.getItemWith({ label: 'node 1' })).isFiltered()).toBeFalsy();

@@ -16,29 +16,41 @@ import { MenuItem } from '../sidebar-menu.interface';
 
 import { RoleService } from './role.service';
 import { SearchService } from './search.service';
+import { rotateAnimation } from './node.animations';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'li[asm-menu-item][menuItem]',
+  animations: [rotateAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container [ngSwitch]="true">
       <span *ngSwitchCase="!!menuItem.header" class="asm-menu-item__header">{{ menuItem.header }}</span>
-      <asm-menu-node
-        *ngSwitchCase="!!menuItem.children"
-        class="asm-menu-node"
-        [menuItem]="menuItem"
-        [level]="level"
-        [disable]="disable || isItemDisabled"
-        (isActive)="onNodeActive($event)"
-        (isFiltered)="onNodeFiltered($event)"
-      ></asm-menu-node>
       <asm-menu-anchor
+        *ngSwitchCase="!menuItem.children"
         class="asm-menu-anchor"
-        *ngSwitchDefault
         [menuItem]="menuItem"
         [disable]="disable || isItemDisabled"
       ></asm-menu-anchor>
+      <ng-container *ngSwitchCase="!!menuItem.children">
+        <asm-menu-anchor
+          class="asm-menu-anchor"
+          [ngClass]="{ 'asm-menu-anchor--open': node.isOpen }"
+          [menuItem]="menuItem"
+          (clickAnchor)="node.onNodeToggleClick()"
+          [isActive]="node.isActiveChild"
+          ><i toggleIcon [@rotate]="node.isOpen" [class]="node.nodeService.toggleIconClasses"></i
+        ></asm-menu-anchor>
+        <asm-menu-node
+          #node
+          class="asm-menu-node"
+          [menuItem]="menuItem"
+          [level]="level"
+          [disable]="disable || isItemDisabled"
+          (isActive)="onNodeActive($event)"
+          (isFiltered)="onNodeFiltered($event)"
+        ></asm-menu-node>
+      </ng-container>
     </ng-container>
   `,
 })
@@ -88,6 +100,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   onNodeFiltered(event: boolean): void {
+    this.isItemFiltered = event;
     this.isFiltered.next(event);
   }
 
