@@ -1,9 +1,21 @@
+:host {
+  display: block;
+  overflow: hidden;
+
+  &:hover {
+    overflow: visible;
+  }
+}
+
 :host ::ng-deep {
-  .asm-menu,
   ul,
-  li {
+  .asm-menu-item {
     margin: 0;
     padding: 0;
+  }
+
+  li {
+    line-height: 0;
   }
 
   .asm-menu-item__header,
@@ -72,36 +84,37 @@
     }
   }
 
-  .asm-menu--mini {
+  .asm-menu--mode-mini,
+  .asm-menu--mode-expandable:not(:hover) {
     width: 50px;
 
+    > ul > .asm-menu-item > .asm-menu-item__header,
+    > ul > .asm-menu-item > .asm-menu-node > ul,
+    > ul > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__pull,
+    > ul > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__pull {
+      display: none;
+    }
+  }
+
+  .asm-menu--mode-mini {
     .asm-menu-node__label {
       display: block;
     }
 
-    > .asm-menu-item {
+    > ul > .asm-menu-item {
       position: relative;
-
-      > .asm-menu-item__header {
-        display: none;
-      }
     }
 
-    > .asm-menu-item > .asm-menu-node > ul,
-    > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__label,
-    > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__pull,
-    > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label,
-    > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__pull {
-      display: none;
-    }
-
-    > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label,
-    > .asm-menu-item:hover > .asm-menu-node > ul {
+    > ul > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item:hover > .asm-menu-node > ul {
       display: block !important;
       position: absolute;
       top: 0;
       left: 100%;
       height: auto !important;
+      z-index: 999;
     }
   }
 }

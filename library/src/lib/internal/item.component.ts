@@ -27,7 +27,7 @@ import { rotateAnimation } from './node.animations';
     <ng-container [ngSwitch]="true">
       <span *ngSwitchCase="!!menuItem.header" class="asm-menu-item__header">{{ menuItem.header }}</span>
       <asm-menu-anchor
-        *ngSwitchCase="!menuItem.children"
+        *ngSwitchCase="!menuItem.children && !menuItem.header"
         class="asm-menu-anchor"
         [menuItem]="menuItem"
         [disable]="disable || isItemDisabled"

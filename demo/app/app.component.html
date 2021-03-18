@@ -1,70 +1,67 @@
-<mat-sidenav-container class="app-sidenav-container" autosize>
-  <mat-sidenav class="app-sidenav" mode="side" opened #matSidenav
-    ><div
-      class="input-search"
-      [ngClass]="{ 'input-search--focus': inputSearchFocus, 'd-none': currentSidebarMode === sidebarModes.MINI }"
-    >
-      <input
-        matInput
-        placeholder="Search..."
-        type="text"
-        (keyup)="currentSearch = $any($event.target).value"
-        (focusin)="inputSearchFocus = true"
-        (focusout)="inputSearchFocus = false"
-      />
-      <i class="fa fa-search"></i>
-    </div>
+<div class="main-wrapper" [ngClass]="{ 'main-wrapper--navigation-open': mainNavigationOpened }">
+  <nav class="main-navigation">
     <asm-angular-sidebar-menu
       *ngIf="menuConfService.menu$ | async as menu"
       [menu]="menu"
-      [mini]="currentSidebarMode === sidebarModes.MINI"
+      [mode]="currentSidebarMode"
       [unAuthorizedVisibility]="visibility.value"
       [role]="currentRole"
       [search]="currentSearch"
       toggleIconClasses="fa fa-angle-left"
       iconClasses="fa fa-circle-o"
-    ></asm-angular-sidebar-menu
-  ></mat-sidenav>
-  <mat-sidenav-content class="app-sidenav-content">
-    <header>
-      <i class="sidebar-toggle fa fa-bars" (click)="matSidenav.toggle()"></i>
-      <mat-form-field appearance="fill">
-        <i matSuffix class="fa fa-chevron-down"></i>
-        <mat-label>Sidebar Mode</mat-label>
-        <mat-select [(value)]="currentSidebarMode">
-          <mat-option [value]="sidebarModes.NORMAL">Normal</mat-option>
-          <mat-option [value]="sidebarModes.MINI">Mini</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <i matSuffix class="fa fa-chevron-down"></i>
-        <mat-label>Role</mat-label>
-        <mat-select [(value)]="currentRole">
-          <mat-option [value]="undefined">Disabled</mat-option>
-          <mat-option value="">None</mat-option>
-          <mat-option [value]="roles.ADMIN">Admin</mat-option>
-          <mat-option [value]="roles.EDITOR">Editor</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <i matSuffix class="fa fa-chevron-down"></i>
-        <mat-label>Visibility</mat-label>
-        <mat-select value="disabled" #visibility>
-          <mat-option value="hidden">Hidden</mat-option>
-          <mat-option value="disabled">Disabled</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <i matSuffix class="fa fa-chevron-down"></i>
-        <mat-label>Menu Lang</mat-label>
-        <mat-select [value]="lang" (selectionChange)="onLangChange($event)">
-          <mat-option value="en">En</mat-option>
-          <mat-option value="fr">Fr</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </header>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    >
+      <div class="input-search" [ngClass]="{ 'input-search--focus': inputSearchFocus }">
+        <input
+          matInput
+          placeholder="Search..."
+          type="text"
+          (keyup)="currentSearch = $any($event.target).value"
+          (focusin)="inputSearchFocus = true"
+          (focusout)="inputSearchFocus = false"
+        />
+        <i class="fa fa-search"></i>
+      </div>
+    </asm-angular-sidebar-menu>
+  </nav>
+  <header class="main-header">
+    <i class="sidebar-toggle fa fa-bars" (click)="mainNavigationOpened = !mainNavigationOpened"></i>
+    <mat-form-field appearance="fill">
+      <i matSuffix class="fa fa-chevron-down"></i>
+      <mat-label>Sidebar Mode</mat-label>
+      <mat-select [(value)]="currentSidebarMode">
+        <mat-option [value]="sidebarModes.EXPANDED">Expanded</mat-option>
+        <mat-option [value]="sidebarModes.EXPANDABLE">Expandable</mat-option>
+        <mat-option [value]="sidebarModes.MINI">Mini</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <i matSuffix class="fa fa-chevron-down"></i>
+      <mat-label>Role</mat-label>
+      <mat-select [(value)]="currentRole">
+        <mat-option [value]="undefined">Disabled</mat-option>
+        <mat-option value="">None</mat-option>
+        <mat-option [value]="roles.ADMIN">Admin</mat-option>
+        <mat-option [value]="roles.EDITOR">Editor</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <i matSuffix class="fa fa-chevron-down"></i>
+      <mat-label>Visibility</mat-label>
+      <mat-select value="disabled" #visibility>
+        <mat-option value="hidden">Hidden</mat-option>
+        <mat-option value="disabled">Disabled</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <i matSuffix class="fa fa-chevron-down"></i>
+      <mat-label>Menu Lang</mat-label>
+      <mat-select [value]="lang" (selectionChange)="onLangChange($event)">
+        <mat-option value="en">En</mat-option>
+        <mat-option value="fr">Fr</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </header>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

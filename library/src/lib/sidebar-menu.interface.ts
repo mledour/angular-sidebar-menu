@@ -2,6 +2,12 @@ import { Role } from './internal/role.service';
 
 export type UnAuthorizedVisibility = 'hidden' | 'disabled';
 
+export enum Modes {
+  EXPANDED = 'expanded',
+  EXPANDABLE = 'expandable',
+  MINI = 'mini',
+}
+
 type MenuItemID = number | string;
 
 export interface MenuItemBadge {

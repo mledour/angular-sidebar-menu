@@ -64,6 +64,7 @@
   background: #1a2226;
   font-size: 12px;
   text-transform: uppercase;
+  line-height: 12px;
 
   .asm-menu-item__header {
     margin-left: -5px;
@@ -93,19 +94,19 @@
   }
 }
 
-.asm-menu--mini {
+.asm-menu--mode-mini {
   .asm-menu-node__label,
-  > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label {
+  > ul > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label {
     font-weight: 400;
   }
 
-  > .asm-menu-item:hover > .asm-menu-node > ul,
-  > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
+  > ul > .asm-menu-item:hover > .asm-menu-node > ul,
+  > ul > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
     border-radius: 0 4px 4px 0;
   }
 
   .asm-menu-node__label,
-  > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
+  > ul > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label {
     line-height: 14px;
     padding: 12px 15px;
     color: #b8c7ce;
