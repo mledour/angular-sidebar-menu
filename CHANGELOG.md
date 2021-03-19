@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.4.0...v1.5.0) (2021-03-19)
+
+
+### Features
+
+* menu expandable ([aa4fb83](https://github.com/mledour/angular-sidebar-menu/commit/aa4fb8373aee488a86fef3c05c90613dbb36291e))
+* menu mini ([353a53c](https://github.com/mledour/angular-sidebar-menu/commit/353a53cb593af22db83d0bde9a09964af7d2f64a))
+
 # [1.4.0](https://github.com/mledour/angular-sidebar-menu/compare/v1.3.0...v1.4.0) (2021-03-08)
 
 
