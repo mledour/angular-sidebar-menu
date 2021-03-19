@@ -1,28 +1,48 @@
+:host {
+  display: block;
+  overflow: hidden;
+
+  &:hover {
+    overflow: visible;
+  }
+}
+
 :host ::ng-deep {
-  .asm-menu,
-  .asm-menu__item,
-  .asm-menu__item__node ul,
-  .asm-menu__item__node li {
+  ul,
+  .asm-menu-item {
     margin: 0;
     padding: 0;
   }
 
-  .asm-menu__item__node:not(.asm-menu__item__node--open) > .ng-trigger-openClose,
-  .asm-menu__item__node > .ng-trigger-openClose.ng-animating {
+  li {
+    line-height: 0;
+  }
+
+  .asm-menu-item__header,
+  .asm-menu-anchor__label,
+  .asm-menu-node__label {
+    white-space: nowrap;
+  }
+
+  .asm-menu-node__label {
+    display: none;
+  }
+
+  .asm-menu-node:not(.asm-menu-node--open) > .ng-trigger-openClose,
+  .asm-menu-node > .ng-trigger-openClose.ng-animating {
     overflow: hidden;
   }
 
-  .asm-menu__item--filtered,
-  .asm-menu__item__node--filtered {
+  .asm-menu-item--filtered {
     display: none;
   }
 
   .asm-menu,
-  .asm-menu__item__node ul {
+  .asm-menu-node ul {
     list-style: none;
   }
 
-  .asm-menu__item__anchor {
+  .asm-menu-anchor a {
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -31,23 +51,23 @@
     user-select: none;
   }
 
-  .asm-menu__item__header {
+  .asm-menu-item__header {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     display: block;
   }
 
-  .asm-menu__item .asm-menu__item__header {
+  .asm-menu-node .asm-menu-item__header {
     margin-left: -6px;
   }
 
-  .asm-menu__item__icon {
+  .asm-menu-anchor__icon {
     width: 20px;
   }
 
-  .asm-menu__item__pull.asm-toggle,
-  .asm-menu__item__pull.asm-badges {
+  .asm-menu-anchor__pull.asm-toggle,
+  .asm-menu-anchor__pull.asm-badges {
     position: absolute;
     right: 10px;
 
@@ -61,6 +81,40 @@
 
     .asm-toggle__icon {
       margin: 0 4px 0 8px;
+    }
+  }
+
+  .asm-menu--mode-mini,
+  .asm-menu--mode-expandable:not(:hover) {
+    width: 50px;
+
+    > ul > .asm-menu-item > .asm-menu-item__header,
+    > ul > .asm-menu-item > .asm-menu-node > ul,
+    > ul > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item > .asm-menu-node > .asm-menu-anchor .asm-menu-anchor__pull,
+    > ul > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item > .asm-menu-anchor .asm-menu-anchor__pull {
+      display: none;
+    }
+  }
+
+  .asm-menu--mode-mini {
+    .asm-menu-node__label {
+      display: block;
+    }
+
+    > ul > .asm-menu-item {
+      position: relative;
+    }
+
+    > ul > .asm-menu-item:hover > .asm-menu-anchor .asm-menu-anchor__label,
+    > ul > .asm-menu-item:hover > .asm-menu-node > ul {
+      display: block !important;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      height: auto !important;
+      z-index: 999;
     }
   }
 }

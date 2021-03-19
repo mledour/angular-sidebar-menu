@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Menu, UnAuthorizedVisibility } from './sidebar-menu.interface';
+import { Menu, Modes, UnAuthorizedVisibility } from './sidebar-menu.interface';
 
 import { AnchorService } from './internal/anchor.service';
 import { NodeService } from './internal/node.service';
@@ -13,11 +13,20 @@ import { trackByItem } from './internal/utils';
   styleUrls: ['sidebar-menu.component.scss'],
   providers: [NodeService, AnchorService, RoleService, SearchService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <ul class="asm-menu" [@.disabled]="disableAnimations">
-    <ng-container *ngFor="let item of menu; trackBy: trackByItem">
-      <li asm-menu-item *ngIf="roleService.showItem$(item.roles) | async" [menuItem]="item" [level]="0"></li>
-    </ng-container>
-  </ul>`,
+  template: ` <div class="asm-menu" [ngClass]="'asm-menu--mode-' + mode" [@.disabled]="disableAnimations">
+    <ng-content></ng-content>
+    <ul class="asm-menu__node">
+      <ng-container *ngFor="let item of menu; trackBy: trackByItem">
+        <li
+          asm-menu-item
+          class="asm-menu-item asm-menu-item--root"
+          *ngIf="roleService.showItem$(item.roles) | async"
+          [menuItem]="item"
+          [level]="0"
+        ></li>
+      </ng-container>
+    </ul>
+  </div>`,
 })
 export class SidebarMenuComponent {
   @Input('menu') set _menu(menu: Menu) {
@@ -43,8 +52,10 @@ export class SidebarMenuComponent {
   @Input() set search(value: string | undefined) {
     this.searchService.search = value;
   }
+  @Input() mode = Modes.EXPANDED;
 
   menu?: Menu;
+  modes = Modes;
   disableAnimations = true;
   trackByItem = trackByItem;
 
